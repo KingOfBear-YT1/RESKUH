@@ -3234,6 +3234,24 @@ router.get("/maker/silver-button", async (req, res, next) => {
   }
 })
 
+router.get("/maker/epep", async (req, res, next) => {
+  
+  apikey = req.query.apikey;
+  text = req.query.text;
+  
+  if(!text) return res.json(loghandler.nottext)
+  if(!apikey) return res.json(loghandler.notparam)
+  
+  if(listkey.includes(apikey)) {
+    let hasil = 'https://api.zeks.me/api/epep?apikey=pikodeka67&text=&text='+ text 
+    data = await fetch(hasil).then(v => v.buffer())
+    await fs.writeFileSync(__path +'/tmp/epep.jpeg', data)
+    res.sendFile(__path +'/tmp/epep.jpeg')
+  } else {
+    res.sendFile(__path + '/views/apikey-not-found.html');
+  }
+})
+
 router.get('/maker/ttp', async(req, res, next) => {
 
   const text = req.query.text;
