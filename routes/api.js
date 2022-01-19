@@ -688,25 +688,24 @@ router.get('/download/fb', async (req, res, next) => {
             
 	if(!Apikey) return res.json(loghandler.notparam)
 	if(listkey.includes(Apikey)){
-    if (!url) return res.json({ status : false, creator : `${creator}`, result : "masukan parameter url"})
+    fetch(encodeURI(`https://api.lolhuman.xyz/api/facebook?apikey=rey2k21&url=${url}`))
+  .then(response => response.json())
+        .then(data => {
 
-       FB(url)
-       .then((data) => {
-         res.json({
-           status: true,
-           code: 200,
-           creator: `${creator}`,
-           title: data.title,
-           desc: data.deskripsi,
-           durasi: data.durasi,
-           thumb: data.thumbnail,
-           result: data.hd
+        var result = data.result;
+             res.json({
+                 status : true,
+                 creator : `${creator}`,
+                 result
+             })
          })
-       });
+         .catch(e => {
+         	res.json(loghandler.error)
+})
 } else {
 res.sendFile(__path + '/views/apikey-not-found.html');
 }
-});
+})
 
 router.get('/stalk/tiktok', async (req, res, next) => {
   const apikey = req.query.apikey;
