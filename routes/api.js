@@ -3258,7 +3258,7 @@ router.get("/maker/joker", async (req, res, next) => {
   if(!apikey) return res.json(loghandler.notparam)
   
   if(listkey.includes(apikey)) {
-    let hasil = 'https://api.lolhuman.xyz/api/textprome/jokerlogo?apikey=rey2k21&text=&text='+ text 
+    let hasil = 'https://api.lolhuman.xyz/api/textprome/jokerlogo?apikey=rey2k21&text='+ text 
     data = await fetch(hasil).then(v => v.buffer())
     await fs.writeFileSync(__path +'/tmp/joker.jpeg', data)
     res.sendFile(__path +'/tmp/joker.jpeg')
