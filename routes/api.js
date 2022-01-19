@@ -3249,6 +3249,24 @@ router.get("/maker/epep", async (req, res, next) => {
   }
 })
 
+router.get("/maker/joker", async (req, res, next) => {
+  
+  apikey = req.query.apikey;
+  text = req.query.text;
+  
+  if(!text) return res.json(loghandler.nottext)
+  if(!apikey) return res.json(loghandler.notparam)
+  
+  if(listkey.includes(apikey)) {
+    let hasil = 'https://api.lolhuman.xyz/api/textprome/jokerlogo?apikey=rey2k21&text=&text='+ text 
+    data = await fetch(hasil).then(v => v.buffer())
+    await fs.writeFileSync(__path +'/tmp/joker.jpeg', data)
+    res.sendFile(__path +'/tmp/joker.jpeg')
+  } else {
+    res.sendFile(__path + '/views/apikey-not-found.html');
+  }
+})
+
 router.get('/maker/ttp', async(req, res, next) => {
 
   const text = req.query.text;
