@@ -662,7 +662,7 @@ router.get('/download/ig', async(req, res, next) => {
   if(!apikey) return res.json(loghandler.notparam)
   
   if(listkey.includes(apikey)){
-    fetch(encodeURI(`https://api.zeks.me/api/ig?apikey=Nrtykhyaa&url=${url}`))
+    fetch(encodeURI(`https://api.lolhuman.xyz/api/instagram?apikey=rey2k21&url=${url}`))
     .then(response => response.json())
         .then(data => {
         var result = data.result;
