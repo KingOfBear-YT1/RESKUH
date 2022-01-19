@@ -709,30 +709,27 @@ res.sendFile(__path + '/views/apikey-not-found.html');
 });
 
 router.get('/stalk/tiktok', async (req, res, next) => {
-    var Apikey = req.query.apikey,
-        username = req.query.username
+  const apikey = req.query.apikey;
+  const query = req.query.query;
+  if(!apikey) return res.json(loghandler.notparam)
+  if(!query) return res.json(loghandler.notquery)
+  
+  if(listkey.includes(apikey)){
+  fetch(encodeURI(`https://api.lolhuman.xyz/api/stalktiktok/${query}?apikey=rey2k21`))
+  .then(response => response.json())
+        .then(hasil => {
 
-	if(!Apikey) return res.json(loghandler.notparam)
-	if(listkey.includes(Apikey)){
-    if (!username) return res.json(loghandler.notusername)
-
-
-    TikTokScraper.getUserProfileInfo(username)
-        .then(user => {
-            res.json({
-                status : true,
-                creator : `${creator}`,
-                result : user
-            })
-        })
-        .catch(e => {
+        var result = hasil;
              res.json({
-                 status : false,
+                 status : true,
                  creator : `${creator}`,
-                 message : "error, mungkin username anda tidak valid"
+                 result
              })
          })
-   } else {
+         .catch(e => {
+         	res.json(loghandler.error)
+})
+} else {
 res.sendFile(__path + '/views/apikey-not-found.html');
 }
 })
