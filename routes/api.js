@@ -710,7 +710,7 @@ res.sendFile(__path + '/views/apikey-not-found.html');
 
 router.get('/stalk/tiktok', async (req, res, next) => {
   const apikey = req.query.apikey;
-  const query = req.query.query;
+  const query = req.query.result;
   if(!apikey) return res.json(loghandler.notparam)
   if(!query) return res.json(loghandler.notquery)
   
