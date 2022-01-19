@@ -710,7 +710,7 @@ res.sendFile(__path + '/views/apikey-not-found.html');
 
 router.get('/stalk/tiktok', async (req, res, next) => {
   const apikey = req.query.apikey;
-  const query = req.query.result;
+  const query = req.query.query;
   if(!apikey) return res.json(loghandler.notparam)
   if(!query) return res.json(loghandler.notquery)
   
@@ -719,7 +719,7 @@ router.get('/stalk/tiktok', async (req, res, next) => {
   .then(response => response.json())
         .then(hasil => {
 
-        var result = hasil;
+        var result = data.result;
              res.json({
                  status : true,
                  creator : `${creator}`,
