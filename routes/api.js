@@ -712,7 +712,7 @@ router.get('/stalk/tiktok', async (req, res, next) => {
   const apikey = req.query.apikey;
   const username = req.query.username;
   if(!apikey) return res.json(loghandler.notparam)
-  if(!query) return res.json(loghandler.notquery)
+  if(!username) return res.json(loghandler.notquery)
   
   if(listkey.includes(apikey)){
   fetch(encodeURI(`https://api.lolhuman.xyz/api/stalktiktok/${username}?apikey=rey2k21`))
