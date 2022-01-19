@@ -710,12 +710,12 @@ res.sendFile(__path + '/views/apikey-not-found.html');
 
 router.get('/stalk/tiktok', async (req, res, next) => {
   const apikey = req.query.apikey;
-  const query = req.query.query;
+  const username = req.query.username;
   if(!apikey) return res.json(loghandler.notparam)
   if(!query) return res.json(loghandler.notquery)
   
   if(listkey.includes(apikey)){
-  fetch(encodeURI(`https://api.lolhuman.xyz/api/stalktiktok/${query}?apikey=rey2k21`))
+  fetch(encodeURI(`https://api.lolhuman.xyz/api/stalktiktok/${username}?apikey=rey2k21`))
   .then(response => response.json())
         .then(data => {
 
