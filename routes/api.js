@@ -1363,7 +1363,7 @@ router.get('/muslim/ayatkursi', async (req, res, next) => {
 	if(!Apikey) return res.json(loghandler.notparam)
 	if(listkey.includes(Apikey)){
 
-       fetch(encodeURI(`https://raw.githubusercontent.com/Zhirrr/My-SQL-Results/main/data/dataAyatKursi.json`))
+       fetch(encodeURI(`https://raw.githubusercontent.com/saipulanuar/database/master/religi/ayatkursi.json`))
         .then(response => response.json())
         .then(data => {
         var result = data;
