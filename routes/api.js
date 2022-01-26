@@ -654,9 +654,9 @@ res.sendFile(__path + '/views/apikey-not-found.html');
 }
 })
 
-router.get('/tiktok', async (req, res, next) => {
+router.get('/download/tiktoknowm', async (req, res, next) => {
   const apikey = req.query.apikey;
-  const username = req.query.url;
+  const url = req.query.url;
   if(!apikey) return res.json(loghandler.notparam)
   if(!url) return res.json(loghandler.notquery)
   
