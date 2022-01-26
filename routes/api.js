@@ -898,27 +898,20 @@ res.sendFile(__path + '/views/apikey-not-found.html');
 }
 })
 
-router.get('/loli', async (req, res, next) => {
-        var Apikey = req.query.apikey
-            
-	if(!Apikey) return res.json(loghandler.notparam)
-	if(listkey.includes(Apikey)){
-
-       fetch(encodeURI(`https://api.lolhuman.xyz/api/random/loli?apikey=rey2k21`))
-        .then(response => response.json())
-        .then(data => {
-        var result = data.result;
-             res.json({
-                 creator : `${creator}`,
-                 result
-             })
-         })
-         .catch(e => {
-         	res.json(loghandler.error)
-})
-} else {
-res.sendFile(__path + '/views/apikey-not-found.html');
-}
+router.get("/loli", async (req, res, next) => {
+  
+  apikey = req.query.apikey;
+  
+  if(!apikey) return res.json(loghandler.notparam)
+  
+  if(listkey.includes(apikey)) {
+    let hasil = 'https://api.lolhuman.xyz/api/random/loli?apikey=rey2k21' 
+    data = await fetch(hasil).then(v => v.buffer())
+    await fs.writeFileSync(__path +'/tmp/loli.jpeg', data)
+    res.sendFile(__path +'/tmp/loli.jpeg')
+  } else {
+    res.sendFile(__path + '/views/apikey-not-found.html');
+  }
 })
 
 router.get('/random/couple', async (req, res, next) => {
