@@ -654,6 +654,32 @@ res.sendFile(__path + '/views/apikey-not-found.html');
 }
 })
 
+router.get('/download/tiktoknowm', async (req, res, next) => {
+  const apikey = req.query.apikey;
+  const username = req.query.url;
+  if(!apikey) return res.json(loghandler.notparam)
+  if(!url) return res.json(loghandler.notquery)
+  
+  if(listkey.includes(apikey)){
+  fetch(encodeURI(`https://api.lolhuman.xyz/api/tiktok?apikey=rey2k21&url=${url}`))
+  .then(response => response.json())
+        .then(data => {
+
+        var result = data.result;
+             res.json({
+                 status : true,
+                 creator : `${creator}`,
+                 result
+             })
+         })
+         .catch(e => {
+         	res.json(loghandler.error)
+})
+} else {
+res.sendFile(__path + '/views/apikey-not-found.html');
+}
+})
+
 router.get('/download/ig', async(req, res, next) => {
   const apikey = req.query.apikey;
   const url = req.query.url;
