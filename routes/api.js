@@ -898,6 +898,29 @@ res.sendFile(__path + '/views/apikey-not-found.html');
 }
 })
 
+router.get('/loli', async (req, res, next) => {
+        var Apikey = req.query.apikey
+            
+	if(!Apikey) return res.json(loghandler.notparam)
+	if(listkey.includes(Apikey)){
+
+       fetch(encodeURI(`https://api.lolhuman.xyz/api/random/loli?apikey=rey2k21`))
+        .then(response => response.json())
+        .then(data => {
+        var result = data.result;
+             res.json({
+                 creator : `${creator}`,
+                 result
+             })
+         })
+         .catch(e => {
+         	res.json(loghandler.error)
+})
+} else {
+res.sendFile(__path + '/views/apikey-not-found.html');
+}
+})
+
 router.get('/random/couple', async (req, res, next) => {
         var Apikey = req.query.apikey
             
