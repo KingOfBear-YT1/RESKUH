@@ -2641,6 +2641,24 @@ router.get('/textpro/neondevil', async(req, res, next) => {
   }
 });
 
+router.get("/textpro/neon", async (req, res, next) => {
+  
+  apikey = req.query.apikey;
+  text = req.query.text;
+  
+  if(!text) return res.json(loghandler.nottext)
+  if(!apikey) return res.json(loghandler.notparam)
+  
+  if(listkey.includes(apikey)) {
+    let hasil = 'https://api.lolhuman.xyz/api/textprome/neon?apikey=rey2k21&text='+ text 
+    data = await fetch(hasil).then(v => v.buffer())
+    await fs.writeFileSync(__path +'/tmp/neon.jpeg', data)
+    res.sendFile(__path +'/tmp/neon.jpeg')
+  } else {
+    res.sendFile(__path + '/views/apikey-not-found.html');
+  }
+});
+
 router.get('/textpro/natural-leaves', async(req, res, next) => {
 
   const apikey = req.query.apikey;
@@ -2949,12 +2967,27 @@ router.get("/textpro/blackpink", async (req, res, next) => {
   }
 });
 
+router.get("/textpro/horrorblood", async (req, res, next) => {
+  
+  apikey = req.query.apikey;
+  text = req.query.text;
+  
+  if(!text) return res.json(loghandler.nottext)
+  if(!apikey) return res.json(loghandler.notparam)
+  
+  if(listkey.includes(apikey)) {
+    let hasil = 'https://api.lolhuman.xyz/api/textprome/horrorblood?apikey=rey2k21&text='+ text 
+    data = await fetch(hasil).then(v => v.buffer())
+    await fs.writeFileSync(__path +'/tmp/horrorblood.jpeg', data)
+    res.sendFile(__path +'/tmp/horrorblood.jpeg')
+  } else {
+    res.sendFile(__path + '/views/apikey-not-found.html');
+  }
+});
+
 router.get('/textpro/drop-water', async(req, res, next) => {
 
-
-
   const apikey = req.query.apikey;
-
   const text = req.query.text;
   
   if(!apikey) return res.json(loghandler.notparam)
