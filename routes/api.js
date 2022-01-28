@@ -2801,6 +2801,34 @@ router.get('/textpro/transfomer', async(req, res, next) => {
   }
 });
 
+router.get('/textpro/sketsa', async(req, res, next) => {
+
+  const apikey = req.query.apikey;
+
+  const text = req.query.text;
+  
+  if(!apikey) return res.json(loghandler.notparam)
+  if(!text) return res.json(loghandler.nottext)
+  
+  if(listkey.includes(apikey)){
+    zrapi 
+  .textpro("https://textpro.me/create-a-sketch-text-effect-online-1044.html", [
+    text,
+  ])
+  .then((data) => {
+    res.json({
+      status: true,
+      code: 200,
+      creator: `${creator}`,
+      result: data
+    })
+  })
+  .catch((err) => console.log(err));
+  } else {
+    res.json(loghandler.invalidKey)
+  }
+});
+
 router.get('/textpro/silvermetal', async(req, res, next) => {
 
   const apikey = req.query.apikey;
