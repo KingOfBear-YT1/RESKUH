@@ -944,21 +944,15 @@ router.get('/textpro/welcome', async (req, res, next) => {
   if(!background) return res.json(loghandler.notbackground)
   
   if(listkey.includes(apikey)){
-fetch(encodeURI(`https://api.lolhuman.xyz/api/base/welcomeimage?apikey=rey2k21&img1=${img1}&img2=${img2}&background=${background}&username=${text1}&member=${text2}&groupname=${text3}`))
-.then(response => response.json())
-        .then(data => {
-        var result = data;
-             res.json({
-               data
-             })
-         })
-         .catch(e => {
-         	res.json(loghandler.error)
-})
+let hasil = 'https://api.lolhuman.xyz/api/base/welcomeimage?apikey=rey2k21&img1=${img1}&img2=${img2}&background=${background}&username=${text1}&member=${text2}&groupname=${text3}' 
+    data = await fetch(hasil).then(v => v.buffer())
+    await fs.writeFileSync(__path +'/tmp/welcomeimage.jpeg', data)
+    res.sendFile(__path +'/tmp/welcomeimage.jpeg')
   } else {
     res.sendFile(__path + '/views/apikey-not-found.html');
   }
-});
+})
+
 
 router.get("/darkjokes", async (req, res, next) => {
   
