@@ -927,14 +927,14 @@ res.sendFile(__path + '/views/apikey-not-found.html');
 }
 })
 
-router.get('/textpro/welcome', async (req, res, next) => {
-  const apikey = req.query.apikey;
-  const username= req.query.username;
-  const img1= req.query.img1;
-  const img2= req.query.img2;
-  const background= req.query.background;
-  const member= req.query.member;
-  const groupname= req.query.groupname;
+router.get('/base/welcomeimage', async (req, res, next) => {
+  apikey = req.query.apikey;
+  username= req.query.username;
+  img1= req.query.img1;
+  img2= req.query.img2;
+  background= req.query.background;
+  member= req.query.member;
+  groupname= req.query.groupname;
   if(!apikey) return res.json(loghandler.notparam)
   if(!username) return res.json(loghandler.notquery)
   if(!img1) return res.json(loghandler.notquery)
@@ -944,7 +944,7 @@ router.get('/textpro/welcome', async (req, res, next) => {
   if(!groupname) return res.json(loghandler.notquery)
   
   if(listkey.includes(apikey)){
-let hasil = 'https://api.lolhuman.xyz/api/base/welcomeimage?apikey=rey2k21&img1=${img1}&img2=${img2}&background=${background}&username=${username}&member=${member}&groupname=${groupname}' 
+  let hasil = 'https://api.lolhuman.xyz/api/base/welcomeimage?apikey=rey2k21&img1='+ img1 +'&img2='+ img2 +'&background='+ background +'&username='+ username +'&member='+ member +'&groupname='+ groupname
     data = await fetch(hasil).then(v => v.buffer())
     await fs.writeFileSync(__path +'/tmp/welcomeimage.jpeg', data)
     res.sendFile(__path +'/tmp/welcomeimage.jpeg')
