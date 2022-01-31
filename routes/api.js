@@ -944,7 +944,7 @@ router.get('/textpro/welcome', async (req, res, next) => {
   if(!background) return res.json(loghandler.notbackground)
   
   if(listkey.includes(apikey)){
-fetch(encodeURI(`https://api.lolhuman.xyz/api/base/welcomeimage?apikey=rey2k21&img1=${img1}&img2=${img2}&background=${background}&username=${username}&member=${member}&groupname=${groupname}`))
+fetch(encodeURI(`https://api.lolhuman.xyz/api/base/welcomeimage?apikey=f213a9ca023f10da92a18da5&img1=${img1}&img2=${img2}&background=${background}&username=${username}&member=${member}&groupname=${groupname}`))
 .then(response => response.json())
           .then((data) => {
     res.json({
