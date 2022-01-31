@@ -499,6 +499,31 @@ router.get('/f/simi', async(req, res, next) => {
 }
 })
 
+router.get('/f/simi2', async(req, res, next) => {
+  const query = req.query.query;
+  const apikey = req.query.apikey;
+  if(!apikey) return res.json(loghandler.notparam)
+  
+  if(listkey.includes(apikey)){
+  fetch(encodeURI(`https://api.lolhuman.xyz/api/simi?apikey=rey2k21&text=${query}`))
+  .then(response => response.json())
+        .then(hasil => {
+
+        var result = data;
+             res.json({
+                 status : true,
+                 creator : `${creator}`,
+                 result
+             })
+         })
+         .catch(e => {
+         	res.json(loghandler.error)
+})
+} else {
+  res.sendFile(__path + '/views/apikey-not-found.html');
+}
+})
+
 router.get('/f/botkuh', async(req, res, next) => {
   const apikey = req.query.apikey;
   const query = req.query.query;
