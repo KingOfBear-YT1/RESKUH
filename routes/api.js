@@ -929,14 +929,14 @@ res.sendFile(__path + '/views/apikey-not-found.html');
 
 router.get('/textpro/welcome', async (req, res, next) => {
   apikey = req.query.apikey;
-  text= req.query.text;
+  text1= req.query.text1;
   text2= req.query.text2;
   text3= req.query.text3;
   img1= req.query.img1;
   img2= req.query.img2;
   background= req.query.background;
   if(!apikey) return res.json(loghandler.notparam)
-  if(!text) return res.json(loghandler.nottext)
+  if(!text) return res.json(loghandler.nottext1)
   if(!text2) return res.json(loghandler.nottext2)
   if(!text3) return res.json(loghandler.nottext3)
   if(!img1) return res.json(loghandler.notimg1)
@@ -944,7 +944,7 @@ router.get('/textpro/welcome', async (req, res, next) => {
   if(!background) return res.json(loghandler.notbackground)
   
   if(listkey.includes(apikey)){
-fetch(encodeURI(`https://api.lolhuman.xyz/api/base/welcomeimage?apikey=rey2k21&img1=${img1}&img2=${img2}&background=${background}&username=${text}&member=${text2}&groupname=${text3}`))
+fetch(encodeURI(`https://api.lolhuman.xyz/api/base/welcomeimage?apikey=rey2k21&img1=${img1}&img2=${img2}&background=${background}&username=${text1}&member=${text2}&groupname=${text3}`))
 .then(response => response.json())
         .then(data => {
         var result = data;
