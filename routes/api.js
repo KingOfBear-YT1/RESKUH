@@ -927,7 +927,7 @@ res.sendFile(__path + '/views/apikey-not-found.html');
 }
 })
 
-router.get('/textpro/welcomeimage', async (req, res, next) => {
+router.get('/textpro/welcome', async (req, res, next) => {
   const apikey = req.query.apikey;
   const username= req.query.username;
   const img1= req.query.img1;
