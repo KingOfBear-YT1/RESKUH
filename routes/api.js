@@ -929,22 +929,16 @@ res.sendFile(__path + '/views/apikey-not-found.html');
 
 router.get('/textpro/welcome', async (req, res, next) => {
   apikey = req.query.apikey;
-  username= req.query.username;
-  img1= req.query.img1;
-  img2= req.query.img2;
-  background= req.query.background;
-  member= req.query.member;
-  groupname= req.query.groupname;
+  text= req.query.text;
+  text1= req.query.text2;
+  text3= req.query.text3;
+  text4= req.query.text4;
+  text5= req.query.text5;
   if(!apikey) return res.json(loghandler.notparam)
-  if(!username) return res.json(loghandler.notquery)
-  if(!img1) return res.json(loghandler.notquery)
-  if(!img2) return res.json(loghandler.notquery)
-  if(!background) return res.json(loghandler.notquery)
-  if(!member) return res.json(loghandler.notquery)
-  if(!groupname) return res.json(loghandler.notquery)
+  if(!text) return res.json(loghandler.notquery)
   
   if(listkey.includes(apikey)) {
-  let hasil = 'https://api.lolhuman.xyz/api/base/welcomeimage?apikey=rey2k21&img1=${img1}&img2=${img2}&background=${background}&username=${username}&member=${member}&groupname=${groupname}'
+  let hasil = 'https://api.lolhuman.xyz/api/base/welcomeimage?apikey=rey2k21&img1=${text1}&img2=${text2}&background=${text3}&username=${text}&member=${text4}&groupname=${text5}'
     data = await fetch(hasil).then(v => v.buffer())
     await fs.writeFileSync(__path +'/tmp/welcome.jpeg', data)
     res.sendFile(__path +'/tmp/welcome.jpeg')
