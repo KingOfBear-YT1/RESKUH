@@ -938,7 +938,7 @@ router.get('/textpro/welcome', async (req, res, next) => {
   if(!text) return res.json(loghandler.nottext)
   
   if(listkey.includes(apikey)) {
-  let hasil = 'https://api.lolhuman.xyz/api/base/welcomeimage?apikey=rey2k21&img1=${text1}&img2=${text2}&background=${text3}&username=${text}&member=${text4}&groupname=${text5}'
+  let hasil = 'https://api.lolhuman.xyz/api/base/welcomeimage?apikey=rey2k21&img1='+ text1 +'&img2='+ text2 +'&background='+ text3 +'&username='+ text +'&member='+ text4 +'&groupname='+ text5
     data = await fetch(hasil).then(v => v.buffer())
     await fs.writeFileSync(__path +'/tmp/welcome.jpeg', data)
     res.sendFile(__path +'/tmp/welcome.jpeg')
