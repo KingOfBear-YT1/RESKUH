@@ -925,9 +925,9 @@ router.get('/cerpen/horor', async (req, res, next) => {
 } else {
 res.sendFile(__path + '/views/apikey-not-found.html');
 }
-})
+});
 
-router.get('/base/welcomeimage', async (req, res, next) => {
+router.get('/textpro/welcome', async (req, res, next) => {
   apikey = req.query.apikey;
   username= req.query.username;
   img1= req.query.img1;
@@ -943,15 +943,15 @@ router.get('/base/welcomeimage', async (req, res, next) => {
   if(!member) return res.json(loghandler.notquery)
   if(!groupname) return res.json(loghandler.notquery)
   
-  if(listkey.includes(apikey)){
+  if(listkey.includes(apikey)) {
   let hasil = 'https://api.lolhuman.xyz/api/base/welcomeimage?apikey=rey2k21&img1='+ img1 +'&img2='+ img2 +'&background='+ background +'&username='+ username +'&member='+ member +'&groupname='+ groupname
     data = await fetch(hasil).then(v => v.buffer())
-    await fs.writeFileSync(__path +'/tmp/welcomeimage.jpeg', data)
-    res.sendFile(__path +'/tmp/welcomeimage.jpeg')
+    await fs.writeFileSync(__path +'/tmp/welcome.jpeg', data)
+    res.sendFile(__path +'/tmp/welcome.jpeg')
   } else {
     res.sendFile(__path + '/views/apikey-not-found.html');
   }
-})
+});
 
 router.get("/darkjokes", async (req, res, next) => {
   
