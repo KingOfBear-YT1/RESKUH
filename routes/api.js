@@ -936,13 +936,13 @@ router.get('/textpro/welcome', async (req, res, next) => {
   img2= req.query.img2;
   background= req.query.background;
   if(!apikey) return res.json(loghandler.notparam)
-  if(!text) return res.json(loghandler.nottext)
+  if(!text) return res.json(loghandler.notquery)
   if(!img1) return res.json(loghandler.notquery)
   if(!img2) return res.json(loghandler.notquery)
   if(!background) return res.json(loghandler.notquery)
   
   if(listkey.includes(apikey)){
-let hasil = 'https://api.lolhuman.xyz/api/base/welcomeimage?apikey=rey2k21&img1=${img1}&img2=${img2}&background=${background}&username='+ text +'&member='+ text2 +'&groupname='+ text3 
+let hasil = `https://api.lolhuman.xyz/api/base/welcomeimage?apikey=rey2k21&img1=${img1}&img2=${img2}&background=${background}&username=${text}&member=${text2}&groupname=${text3}`
     data = await fetch(hasil).then(v => v.buffer())
     await fs.writeFileSync(__path +'/tmp/welcomeimage.jpeg', data)
     res.sendFile(__path +'/tmp/welcomeimage.jpeg')
