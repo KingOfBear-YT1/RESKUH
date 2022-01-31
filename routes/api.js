@@ -935,7 +935,7 @@ router.get('/textpro/welcome', async (req, res, next) => {
   text4= req.query.text4;
   text5= req.query.text5;
   if(!apikey) return res.json(loghandler.notparam)
-  if(!text) return res.json(loghandler.notquery)
+  if(!text) return res.json(loghandler.nottext)
   
   if(listkey.includes(apikey)) {
   let hasil = 'https://api.lolhuman.xyz/api/base/welcomeimage?apikey=rey2k21&img1=${text1}&img2=${text2}&background=${text3}&username=${text}&member=${text4}&groupname=${text5}'
