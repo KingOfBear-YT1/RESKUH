@@ -936,7 +936,7 @@ router.get('/textpro/welcome', async (req, res, next) => {
   img2= req.query.img2;
   background= req.query.background;
   if(!apikey) return res.json(loghandler.notparam)
-  if(!text) return res.json(loghandler.nottext1)
+  if(!text1) return res.json(loghandler.nottext1)
   if(!text2) return res.json(loghandler.nottext2)
   if(!text3) return res.json(loghandler.nottext3)
   if(!img1) return res.json(loghandler.notimg1)
