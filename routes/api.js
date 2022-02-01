@@ -932,7 +932,7 @@ router.get("/sertifikat/tolol", async (req, res, next) => {
   apikey = req.query.apikey;
   name = req.query.name;
   
-  if(!name) return res.json(loghandler.name)
+  if(!name) return res.json(loghandler.notname)
   if(!apikey) return res.json(loghandler.notparam)
   
   if(listkey.includes(apikey)) {
@@ -950,7 +950,7 @@ router.get("/sertifikat/fuckboy", async (req, res, next) => {
   apikey = req.query.apikey;
   name = req.query.name;
   
-  if(!name) return res.json(loghandler.name)
+  if(!name) return res.json(loghandler.notname)
   if(!apikey) return res.json(loghandler.notparam)
   
   if(listkey.includes(apikey)) {
@@ -968,7 +968,7 @@ router.get("/sertifikat/fuckgirl", async (req, res, next) => {
   apikey = req.query.apikey;
   name = req.query.name;
   
-  if(!name) return res.json(loghandler.name)
+  if(!name) return res.json(loghandler.notname)
   if(!apikey) return res.json(loghandler.notparam)
   
   if(listkey.includes(apikey)) {
@@ -986,7 +986,7 @@ router.get("/sertifikat/bucinserti", async (req, res, next) => {
   apikey = req.query.apikey;
   name = req.query.name;
   
-  if(!name) return res.json(loghandler.name)
+  if(!name) return res.json(loghandler.notname)
   if(!apikey) return res.json(loghandler.notparam)
   
   if(listkey.includes(apikey)) {
@@ -1005,8 +1005,8 @@ router.get("/sertifikat/pacarserti", async (req, res, next) => {
   name1 = req.query.name1;
   name2 = req.query.name2;
   
-  if(!name1) return res.json(loghandler.name1)
-  if(!name2) return res.json(loghandler.name2)
+  if(!name1) return res.json(loghandler.notname1)
+  if(!name2) return res.json(loghandler.notname2)
   if(!apikey) return res.json(loghandler.notparam)
   
   if(listkey.includes(apikey)) {
@@ -1014,6 +1014,24 @@ router.get("/sertifikat/pacarserti", async (req, res, next) => {
     data = await fetch(hasil).then(v => v.buffer())
     await fs.writeFileSync(__path +'/tmp/pacarserti.jpeg', data)
     res.sendFile(__path +'/tmp/pacarserti.jpeg')
+  } else {
+    res.sendFile(__path + '/views/apikey-not-found.html');
+  }
+});
+
+router.get("/ttp", async (req, res, next) => {
+  
+  apikey = req.query.apikey;
+  text = req.query.text;
+  
+  if(!text) return res.json(loghandler.nottext)
+  if(!apikey) return res.json(loghandler.notparam)
+  
+  if(listkey.includes(apikey)) {
+    let hasil = 'https://api.lolhuman.xyz/api/ttp?apikey=rey2k21&text='+ text 
+    data = await fetch(hasil).then(v => v.buffer())
+    await fs.writeFileSync(__path +'/tmp/ttp.jpeg', data)
+    res.sendFile(__path +'/tmp/ttp.jpeg')
   } else {
     res.sendFile(__path + '/views/apikey-not-found.html');
   }
