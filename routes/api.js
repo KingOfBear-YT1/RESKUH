@@ -930,13 +930,13 @@ res.sendFile(__path + '/views/apikey-not-found.html');
 router.get("/sertifikat/tolol", async (req, res, next) => {
   
   apikey = req.query.apikey;
-  text = req.query.text;
+  name = req.query.name;
   
-  if(!text) return res.json(loghandler.nottext)
+  if(!name) return res.json(loghandler.name)
   if(!apikey) return res.json(loghandler.notparam)
   
   if(listkey.includes(apikey)) {
-    let hasil = 'https://api.lolhuman.xyz/api/toloserti?apikey=rey2k21&name='+ text 
+    let hasil = 'https://api.lolhuman.xyz/api/toloserti?apikey=rey2k21&name='+ name 
     data = await fetch(hasil).then(v => v.buffer())
     await fs.writeFileSync(__path +'/tmp/tolol.jpeg', data)
     res.sendFile(__path +'/tmp/tolol.jpeg')
