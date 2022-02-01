@@ -1019,7 +1019,7 @@ router.get("/sertifikat/pacarserti", async (req, res, next) => {
   }
 });
 
-router.get("/ttp", async (req, res, next) => {
+router.get("/sertifikat/ttp", async (req, res, next) => {
   
   apikey = req.query.apikey;
   text = req.query.text;
