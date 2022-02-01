@@ -963,6 +963,62 @@ router.get("/sertifikat/fuckboy", async (req, res, next) => {
   }
 });
 
+router.get("/sertifikat/fuckgirl", async (req, res, next) => {
+  
+  apikey = req.query.apikey;
+  name = req.query.name;
+  
+  if(!name) return res.json(loghandler.name)
+  if(!apikey) return res.json(loghandler.notparam)
+  
+  if(listkey.includes(apikey)) {
+    let hasil = 'https://api.lolhuman.xyz/api/fuckgirl?apikey=rey2k21&name='+ name 
+    data = await fetch(hasil).then(v => v.buffer())
+    await fs.writeFileSync(__path +'/tmp/fuckgirl.jpeg', data)
+    res.sendFile(__path +'/tmp/fuckgirl.jpeg')
+  } else {
+    res.sendFile(__path + '/views/apikey-not-found.html');
+  }
+});
+
+router.get("/sertifikat/bucinserti", async (req, res, next) => {
+  
+  apikey = req.query.apikey;
+  name = req.query.name;
+  
+  if(!name) return res.json(loghandler.name)
+  if(!apikey) return res.json(loghandler.notparam)
+  
+  if(listkey.includes(apikey)) {
+    let hasil = 'https://api.lolhuman.xyz/api/bucinserti?apikey=rey2k21&name='+ name 
+    data = await fetch(hasil).then(v => v.buffer())
+    await fs.writeFileSync(__path +'/tmp/bucinserti.jpeg', data)
+    res.sendFile(__path +'/tmp/bucinserti.jpeg')
+  } else {
+    res.sendFile(__path + '/views/apikey-not-found.html');
+  }
+});
+
+router.get("/sertifikat/pacarserti", async (req, res, next) => {
+  
+  apikey = req.query.apikey;
+  name1 = req.query.name1;
+  name2 = req.query.name2;
+  
+  if(!name1) return res.json(loghandler.name1)
+  if(!name2) return res.json(loghandler.name2)
+  if(!apikey) return res.json(loghandler.notparam)
+  
+  if(listkey.includes(apikey)) {
+    let hasil = 'https://api.lolhuman.xyz/api/pacarserti?apikey=rey2k21&name1='+ name1 +'&name2='+ name2 
+    data = await fetch(hasil).then(v => v.buffer())
+    await fs.writeFileSync(__path +'/tmp/pacarserti.jpeg', data)
+    res.sendFile(__path +'/tmp/pacarserti.jpeg')
+  } else {
+    res.sendFile(__path + '/views/apikey-not-found.html');
+  }
+});
+
 router.get("/darkjokes", async (req, res, next) => {
   
   apikey = req.query.apikey;
