@@ -927,32 +927,23 @@ res.sendFile(__path + '/views/apikey-not-found.html');
 }
 });
 
-router.get('/textpro/welcome', async (req, res, next) => {
-  apikey = req.query.apikey;
-  username= req.query.username;
-  member= req.query.member;
-  groupname= req.query.groupname;
-  img1= req.query.img1;
-  img2= req.query.img2;
-  background= req.query.background;
-  if(!apikey) return res.json(loghandler.notparam)
-  if(!username) return res.json(loghandler.notusername)
-  if(!member) return res.json(loghandler.notmember)
-  if(!groupname) return res.json(loghandler.notgroupname)
-  if(!img1) return res.json(loghandler.notimg1)
-  if(!img2) return res.json(loghandler.notimg2)
-  if(!background) return res.json(loghandler.notbackground)
+router.get("/sertifikat/tolol", async (req, res, next) => {
   
-  if(listkey.includes(apikey)){
-let hasil = 'https://api.lolhuman.xyz/api/base/welcomeimage?apikey=rey2k21&img1=${img1}&img2=${img2}&background=${background}&username='+ username +'&member='+ member +'&groupname='+ groupname
-
+  apikey = req.query.apikey;
+  text = req.query.text;
+  
+  if(!text) return res.json(loghandler.nottext)
+  if(!apikey) return res.json(loghandler.notparam)
+  
+  if(listkey.includes(apikey)) {
+    let hasil = 'https://api.lolhuman.xyz/api/toloserti?apikey=rey2k21&name='+ text 
     data = await fetch(hasil).then(v => v.buffer())
-    await fs.writeFileSync(__path +'/tmp/welcomeimage.jpeg', data)
-    res.sendFile(__path +'/tmp/welcomeimage.jpeg')
+    await fs.writeFileSync(__path +'/tmp/tolol.jpeg', data)
+    res.sendFile(__path +'/tmp/tolol.jpeg')
   } else {
     res.sendFile(__path + '/views/apikey-not-found.html');
   }
-})
+});
 
 router.get("/darkjokes", async (req, res, next) => {
   
