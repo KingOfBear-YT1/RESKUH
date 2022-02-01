@@ -945,6 +945,24 @@ router.get("/sertifikat/tolol", async (req, res, next) => {
   }
 });
 
+router.get("/sertifikat/fuckboy", async (req, res, next) => {
+  
+  apikey = req.query.apikey;
+  name = req.query.name;
+  
+  if(!name) return res.json(loghandler.name)
+  if(!apikey) return res.json(loghandler.notparam)
+  
+  if(listkey.includes(apikey)) {
+    let hasil = 'https://api.lolhuman.xyz/api/fuckboy?apikey=rey2k21&name='+ name 
+    data = await fetch(hasil).then(v => v.buffer())
+    await fs.writeFileSync(__path +'/tmp/fuckboy.jpeg', data)
+    res.sendFile(__path +'/tmp/fuckboy.jpeg')
+  } else {
+    res.sendFile(__path + '/views/apikey-not-found.html');
+  }
+});
+
 router.get("/darkjokes", async (req, res, next) => {
   
   apikey = req.query.apikey;
