@@ -2389,6 +2389,28 @@ res.json(loghandler.invalidKey)
 }
 })
 
+router.get('/kuis/tebakbendera', async (req, res, next) => {
+        var Apikey = req.query.apikey
+	if(!Apikey) return res.json(loghandler.notparam)
+	if(listkey.includes(Apikey)){
+       fetch(encodeURI(`https://api.lolhuman.xyz/api/tebak/bendera?apikey=rey2k21`))
+  .then(response => response.json())
+        .then(data => {
+
+        var result = data.result;
+             res.json({
+                 status : true,
+                 creator : `${creator}`,
+                 result
+             })
+         })
+         .catch(e => {
+         	res.json(loghandler.error)
+})
+} else {
+res.sendFile(__path + '/views/apikey-not-found.html');
+}
+})
 
 router.get('/kuis/tebakGambar', async (req, res, next) => {
   var apikey = req.query.apikey;
