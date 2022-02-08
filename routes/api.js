@@ -1117,6 +1117,31 @@ res.sendFile(__path + '/views/apikey-not-found.html');
 }
 })
 
+router.get('/id/ml', async (req, res, next) => {
+        var Apikey = req.query.apikey;
+	var id = req.query.id;
+            
+	if(!Apikey) return res.json(loghandler.notparam)
+	if(!id) return res.json({'Pesan_untuk_anda': 'Masukkin id Mobile Legendsnya'})
+	if(listkey.includes(Apikey)){
+
+       fetch(encodeURI(`https://api.lolhuman.xyz/api/mobilelegend/${id}?apikey=KingOfBear`))
+        .then(response => response.json())
+        .then(data => {
+        var result = data.result;
+             res.json({
+                 creator : `${creator}`,
+                 result
+             })
+         })
+         .catch(e => {
+         	res.json(loghandler.error)
+})
+} else {
+res.sendFile(__path + '/views/apikey-not-found.html');
+}
+})
+
 router.get('/database/micanbot', async (req, res, next) => {
         var Apikey = req.query.apikey
 const portabel = '8080'
