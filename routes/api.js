@@ -2232,6 +2232,22 @@ res.json(loghandler.invalidKey)
 }
 })
 
+router.get("/random/memeindo", async (req, res, next) => {
+  
+  apikey = req.query.apikey;
+  
+  if(!apikey) return res.json(loghandler.notparam)
+  
+  if(listkey.includes(apikey)) {
+    let hasil = 'https://api.lolhuman.xyz/api/meme/memeindo?apikey=KingOfBear' 
+    data = await fetch(hasil).then(v => v.buffer())
+    await fs.writeFileSync(__path +'/tmp/memeindo.jpeg', data)
+    res.sendFile(__path +'/tmp/memeindo.jpeg')
+  } else {
+    res.sendFile(__path + '/views/apikey-not-found.html');
+  }
+})
+
 
 router.get('/info/kodepos', async (req, res, next) => {
         var Apikey = req.query.apikey,
