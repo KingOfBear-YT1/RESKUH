@@ -506,7 +506,7 @@ router.get('/f/simi2', async (req, res, next) => {
   if(!query) return res.json(loghandler.notquery)
   
   if(listkey.includes(apikey)){
-  fetch(encodeURI(`https://api.lolhuman.xyz/api/simi?apikey=rey2k21&text=${query}`))
+  fetch(encodeURI(`https://api.lolhuman.xyz/api/simi?apikey=KingOfBear&text=${query}`))
   .then(response => response.json())
         .then(data => {
 
@@ -687,7 +687,7 @@ router.get('/download/tiktoknowm', async (req, res, next) => {
   if(!url) return res.json(loghandler.notquery)
   
   if(listkey.includes(apikey)){
-  fetch(encodeURI(`https://api.lolhuman.xyz/api/tiktok?apikey=rey2k21&url=${url}`))
+  fetch(encodeURI(`https://api.lolhuman.xyz/api/tiktok?apikey=KingOfBear&url=${url}`))
   .then(response => response.json())
         .then(data => {
 
@@ -714,7 +714,7 @@ router.get('/download/ig', async(req, res, next) => {
   if(!apikey) return res.json(loghandler.notparam)
   
   if(listkey.includes(apikey)){
-    fetch(encodeURI(`https://api.lolhuman.xyz/api/instagram?apikey=rey2k21&url=${url}`))
+    fetch(encodeURI(`https://api.lolhuman.xyz/api/instagram?apikey=KingOfBear&url=${url}`))
     .then(response => response.json())
         .then(data => {
         var result = data.result;
@@ -740,7 +740,7 @@ router.get('/download/fb', async (req, res, next) => {
             
 	if(!Apikey) return res.json(loghandler.notparam)
 	if(listkey.includes(Apikey)){
-    fetch(encodeURI(`https://api.lolhuman.xyz/api/facebook?apikey=rey2k21&url=${url}`))
+    fetch(encodeURI(`https://api.lolhuman.xyz/api/facebook?apikey=KingOfBear&url=${url}`))
   .then(response => response.json())
         .then(data => {
 
@@ -766,7 +766,7 @@ router.get('/stalk/tiktok', async (req, res, next) => {
   if(!username) return res.json(loghandler.notquery)
   
   if(listkey.includes(apikey)){
-  fetch(encodeURI(`https://api.lolhuman.xyz/api/stalktiktok/${username}?apikey=rey2k21`))
+  fetch(encodeURI(`https://api.lolhuman.xyz/api/stalktiktok/${username}?apikey=KingOfBear`))
   .then(response => response.json())
         .then(data => {
 
@@ -936,7 +936,7 @@ router.get("/sertifikat/tolol", async (req, res, next) => {
   if(!apikey) return res.json(loghandler.notparam)
   
   if(listkey.includes(apikey)) {
-    let hasil = 'https://api.lolhuman.xyz/api/toloserti?apikey=rey2k21&name='+ name 
+    let hasil = 'https://api.lolhuman.xyz/api/toloserti?apikey=KingOfBear&name='+ name 
     data = await fetch(hasil).then(v => v.buffer())
     await fs.writeFileSync(__path +'/tmp/tolol.jpeg', data)
     res.sendFile(__path +'/tmp/tolol.jpeg')
@@ -954,7 +954,7 @@ router.get("/sertifikat/fuckboy", async (req, res, next) => {
   if(!apikey) return res.json(loghandler.notparam)
   
   if(listkey.includes(apikey)) {
-    let hasil = 'https://api.lolhuman.xyz/api/fuckboy?apikey=rey2k21&name='+ name 
+    let hasil = 'https://api.lolhuman.xyz/api/fuckboy?apikey=KingOfBear&name='+ name 
     data = await fetch(hasil).then(v => v.buffer())
     await fs.writeFileSync(__path +'/tmp/fuckboy.jpeg', data)
     res.sendFile(__path +'/tmp/fuckboy.jpeg')
@@ -972,7 +972,7 @@ router.get("/sertifikat/fuckgirl", async (req, res, next) => {
   if(!apikey) return res.json(loghandler.notparam)
   
   if(listkey.includes(apikey)) {
-    let hasil = 'https://api.lolhuman.xyz/api/fuckgirl?apikey=rey2k21&name='+ name 
+    let hasil = 'https://api.lolhuman.xyz/api/fuckgirl?apikey=KingOfBear&name='+ name 
     data = await fetch(hasil).then(v => v.buffer())
     await fs.writeFileSync(__path +'/tmp/fuckgirl.jpeg', data)
     res.sendFile(__path +'/tmp/fuckgirl.jpeg')
@@ -990,7 +990,7 @@ router.get("/sertifikat/bucinserti", async (req, res, next) => {
   if(!apikey) return res.json(loghandler.notparam)
   
   if(listkey.includes(apikey)) {
-    let hasil = 'https://api.lolhuman.xyz/api/bucinserti?apikey=rey2k21&name='+ name 
+    let hasil = 'https://api.lolhuman.xyz/api/bucinserti?apikey=KingOfBear&name='+ name 
     data = await fetch(hasil).then(v => v.buffer())
     await fs.writeFileSync(__path +'/tmp/bucinserti.jpeg', data)
     res.sendFile(__path +'/tmp/bucinserti.jpeg')
@@ -1010,7 +1010,7 @@ router.get("/sertifikat/pacarserti", async (req, res, next) => {
   if(!apikey) return res.json(loghandler.notparam)
   
   if(listkey.includes(apikey)) {
-    let hasil = 'https://api.lolhuman.xyz/api/pacarserti?apikey=rey2k21&name1='+ name1 +'&name2='+ name2 
+    let hasil = 'https://api.lolhuman.xyz/api/pacarserti?apikey=KingOfBear&name1='+ name1 +'&name2='+ name2 
     data = await fetch(hasil).then(v => v.buffer())
     await fs.writeFileSync(__path +'/tmp/pacarserti.jpeg', data)
     res.sendFile(__path +'/tmp/pacarserti.jpeg')
@@ -1028,7 +1028,7 @@ router.get("/sertifikat/ttp", async (req, res, next) => {
   if(!apikey) return res.json(loghandler.notparam)
   
   if(listkey.includes(apikey)) {
-    let hasil = 'https://api.lolhuman.xyz/api/ttp?apikey=rey2k21&text='+ text 
+    let hasil = 'https://api.lolhuman.xyz/api/ttp?apikey=KingOfBear&text='+ text 
     data = await fetch(hasil).then(v => v.buffer())
     await fs.writeFileSync(__path +'/tmp/ttp.jpeg', data)
     res.sendFile(__path +'/tmp/ttp.jpeg')
@@ -1044,7 +1044,7 @@ router.get("/darkjokes", async (req, res, next) => {
   if(!apikey) return res.json(loghandler.notparam)
   
   if(listkey.includes(apikey)) {
-    let hasil = 'https://api.lolhuman.xyz/api/meme/darkjoke?apikey=rey2k21' 
+    let hasil = 'https://api.lolhuman.xyz/api/meme/darkjoke?apikey=KingOfBear' 
     data = await fetch(hasil).then(v => v.buffer())
     await fs.writeFileSync(__path +'/tmp/darkjokes.jpeg', data)
     res.sendFile(__path +'/tmp/darkjokes.jpeg')
@@ -1060,7 +1060,7 @@ router.get("/loli", async (req, res, next) => {
   if(!apikey) return res.json(loghandler.notparam)
   
   if(listkey.includes(apikey)) {
-    let hasil = 'https://api.lolhuman.xyz/api/random/loli?apikey=rey2k21' 
+    let hasil = 'https://api.lolhuman.xyz/api/random/loli?apikey=KingOfBear' 
     data = await fetch(hasil).then(v => v.buffer())
     await fs.writeFileSync(__path +'/tmp/loli.jpeg', data)
     res.sendFile(__path +'/tmp/loli.jpeg')
@@ -2393,7 +2393,7 @@ router.get('/kuis/tebakbendera', async (req, res, next) => {
         var Apikey = req.query.apikey
 	if(!Apikey) return res.json(loghandler.notparam)
 	if(listkey.includes(Apikey)){
-       fetch(encodeURI(`https://api.lolhuman.xyz/api/tebak/bendera?apikey=rey2k21`))
+       fetch(encodeURI(`https://api.lolhuman.xyz/api/tebak/bendera?apikey=KingOfBear`))
   .then(response => response.json())
         .then(data => {
 
@@ -2808,7 +2808,7 @@ router.get("/textpro/neon", async (req, res, next) => {
   if(!apikey) return res.json(loghandler.notparam)
   
   if(listkey.includes(apikey)) {
-    let hasil = 'https://api.lolhuman.xyz/api/textprome/neon?apikey=rey2k21&text='+ text 
+    let hasil = 'https://api.lolhuman.xyz/api/textprome/neon?apikey=KingOfBear&text='+ text 
     data = await fetch(hasil).then(v => v.buffer())
     await fs.writeFileSync(__path +'/tmp/neon.jpeg', data)
     res.sendFile(__path +'/tmp/neon.jpeg')
@@ -3144,7 +3144,7 @@ router.get("/textpro/blackpink", async (req, res, next) => {
   if(!apikey) return res.json(loghandler.notparam)
   
   if(listkey.includes(apikey)) {
-    let hasil = 'https://api.lolhuman.xyz/api/textprome/blackpink?apikey=rey2k21&text='+ text 
+    let hasil = 'https://api.lolhuman.xyz/api/textprome/blackpink?apikey=KingOfBear&text='+ text 
     data = await fetch(hasil).then(v => v.buffer())
     await fs.writeFileSync(__path +'/tmp/blackpink.jpeg', data)
     res.sendFile(__path +'/tmp/blackpink.jpeg')
@@ -3162,7 +3162,7 @@ router.get("/textpro/horrorblood", async (req, res, next) => {
   if(!apikey) return res.json(loghandler.notparam)
   
   if(listkey.includes(apikey)) {
-    let hasil = 'https://api.lolhuman.xyz/api/textprome/horrorblood?apikey=rey2k21&text='+ text 
+    let hasil = 'https://api.lolhuman.xyz/api/textprome/horrorblood?apikey=KingOfBear&text='+ text 
     data = await fetch(hasil).then(v => v.buffer())
     await fs.writeFileSync(__path +'/tmp/horrorblood.jpeg', data)
     res.sendFile(__path +'/tmp/horrorblood.jpeg')
@@ -3532,7 +3532,7 @@ router.get("/maker/joker", async (req, res, next) => {
   if(!apikey) return res.json(loghandler.notparam)
   
   if(listkey.includes(apikey)) {
-    let hasil = 'https://api.lolhuman.xyz/api/textprome/jokerlogo?apikey=rey2k21&text='+ text 
+    let hasil = 'https://api.lolhuman.xyz/api/textprome/jokerlogo?apikey=KingOfBear&text='+ text 
     data = await fetch(hasil).then(v => v.buffer())
     await fs.writeFileSync(__path +'/tmp/joker.jpeg', data)
     res.sendFile(__path +'/tmp/joker.jpeg')
