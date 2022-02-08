@@ -1120,12 +1120,14 @@ res.sendFile(__path + '/views/apikey-not-found.html');
 router.get('/id/ml', async (req, res, next) => {
         var Apikey = req.query.apikey;
 	var id = req.query.id;
+	var server = req.query.server;
             
 	if(!Apikey) return res.json(loghandler.notparam)
 	if(!id) return res.json({'Pesan_untuk_anda': 'Masukkin id Mobile Legendsnya'})
+	if(!server) return res.json({'Pesan_untuk_anda': 'Masukkin Servernya'})
 	if(listkey.includes(Apikey)){
 
-       fetch(encodeURI(`https://api.lolhuman.xyz/api/mobilelegend/${id}?apikey=KingOfBear`))
+       fetch(encodeURI(`https://api.lolhuman.xyz/api/mobilelegend/${id}/${server}?apikey=KingOfBear`))
         .then(response => response.json())
         .then(data => {
         var result = data.result;
