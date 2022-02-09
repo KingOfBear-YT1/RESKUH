@@ -3478,12 +3478,12 @@ router.get('/asupan', async (req, res, next) => {
  
 router.get("/maker/nulis", async (req, res, next) => {
   const apikey = req.query.apikey;
-  const query = req.query.query;
+  const text = req.query.text;
   if(!apikey) return res.json(loghandler.notparam)
-  if(!query) return res.json(loghandler.notquery)
+  if(!text) return res.json(loghandler.nottext)
   
   if(listkey.includes(apikey)){
-  fetch(encodeURI(`https://itskhyaa-textmaker.herokuapp.com/api/nulis?text=${query}`))
+  fetch(encodeURI(`https://itskhyaa-textmaker.herokuapp.com/api/nulis?text=${text}`))
   .then(response => response.json())
         .then(hasil => {
 
