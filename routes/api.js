@@ -57,10 +57,6 @@ var {
 } = require("./../lib/utils/pinterest");
 
 var {
-  ttaudio
-} = require("./../lib/utils/ttaudio");
-
-var {
   ytDonlodMp3,
   ytDonlodMp4,
   ytPlayMp3,
