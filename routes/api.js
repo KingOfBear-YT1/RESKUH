@@ -668,25 +668,6 @@ router.get('/yt/search', async(req, res, next) => {
      }
 });
 
-router.get("/download/ttaudio", async(req, res, next) => {
-    const url = req.query.url;
-    const apikey = req.query.apikey;
-    
-    if(!url) return res.json(loghandler.noturl)
-    if(!apikey) return res.json(loghandler.notparam)
-    if(listkey.includes(apikey)){
-    ttaudio(url)
-        .then((data) => {
-            res.json(data);
-        })
-        .catch((error) => {
-            res.json(error);
-        });
-      } else {
-       res.sendFile(__path + '/views/apikey-not-found.html');
-      }
-});
-
 router.get('/download/tiktok', async (req, res, next) => {
     var Apikey = req.query.apikey,
         url = req.query.url
