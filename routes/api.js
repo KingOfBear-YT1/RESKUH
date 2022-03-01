@@ -1072,28 +1072,28 @@ router.get('/darkjoke', async (req, res, next) => {
     const Darkjoke = darkjoke[Math.floor(Math.random() * darkjoke.length)];
     let hasil = Darkjoke.darkjoke;
     data = await fetch(hasil).then(v => v.buffer())
-    await fs.writeFileSync(__path +'/tmp/darkjoke.jpg', data)
-    res.sendFile(__path +'/tmp/darkjoke.jpg')
+    await fs.writeFileSync(__path +'/tmp/darkjoke.jpeg', data)
+    res.sendFile(__path +'/tmp/darkjoke.jpeg')
   } else {
     res.json(loghandler.invalidKey)
   }
 });
 
-router.get("/loli", async (req, res, next) => {
+router.get('/loli', async (req, res, next) => {
+  Apikey = req.query.apikey;
   
-  apikey = req.query.apikey;
-  
-  if(!apikey) return res.json(loghandler.notparam)
-  
-  if(listkey.includes(apikey)) {
-    let hasil = 'https://api.lolhuman.xyz/api/random/loli?apikey=KingOfBear' 
+  if(!Apikey) return res.json(loghandler.notparam)
+  if(listkey.includes(Apikey)) {
+    const loli = JSON.parse(fs.readFileSync(__path +'/data/loli.json'));
+    const Loli = loli[Math.floor(Math.random() * loli.length)];
+    let hasil = Loli.loli;
     data = await fetch(hasil).then(v => v.buffer())
     await fs.writeFileSync(__path +'/tmp/loli.jpeg', data)
     res.sendFile(__path +'/tmp/loli.jpeg')
   } else {
-    res.sendFile(__path + '/views/apikey-not-found.html');
+    res.json(loghandler.invalidKey)
   }
-})
+});
 
 router.get('/random/couple', async (req, res, next) => {
         var Apikey = req.query.apikey
