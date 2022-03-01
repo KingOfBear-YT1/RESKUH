@@ -1070,14 +1070,16 @@ router.get("/darkjokes", async (req, res, next) => {
   if(!apikey) return res.json(loghandler.notparam)
   
   if(listkey.includes(apikey)) {
-    let hasil = 'https://api.lolhuman.xyz/api/meme/darkjoke?apikey=KingOfBear' 
+    const darkjoke = JSON.parse(fs.readFileSync(__path +'/data/darkjoke.json'));
+    const Darkjoke = darkjoke[Math.floor(Math.random() * darkjoke.length)];
+    let hasil = Darkjoke.darkjoke;
     data = await fetch(hasil).then(v => v.buffer())
-    await fs.writeFileSync(__path +'/tmp/darkjokes.jpeg', data)
-    res.sendFile(__path +'/tmp/darkjokes.jpeg')
+    await fs.writeFileSync(__path +'/tmp/darkjoke.jpeg', data)
+    res.sendFile(__path +'/tmp/darkjoke.jpeg')
   } else {
-    res.sendFile(__path + '/views/apikey-not-found.html');
+    res.json(loghandler.invalidKey)
   }
-})
+});
 
 router.get("/loli", async (req, res, next) => {
   
