@@ -917,12 +917,11 @@ router.get('/quotes', async (req, res, next) => {
     let hasil = Quotes.quotes;
     data = await fetch(hasil).then(response => response.json())
         .then(result => {
-        var result = result;
-             res.json({
-                 creator : `${creator}`,
-                 result
-             })
-         })
+        res.status(200).send({
+            status: 200, 
+            quotes: result.quotes, 
+            author: result.author
+        });
          .catch(e => {
          	res.json(loghandler.error)
 })
