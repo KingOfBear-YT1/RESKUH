@@ -899,14 +899,10 @@ router.get('/quotes', async (req, res, next) => {
   
   if(!Apikey) return res.json(loghandler.notparam)
   if(listkey.includes(Apikey)) {
-    const quotes = JSON.parse(fs.readFileSync(__path +'/data/quotes.json'));
-    function pickRandom(list) {
-  return list[Math.floor(list.length * Math.random())]
-}
-    let hasil = pickRandom(quotes);
-    data = await fetch(hasil).then(response => response.json())
-        .then(data => {
-        var result = data;
+       fetch(encodeURI(`http://kocakz.herokuapp.com/api/random/text/quotes`))
+        .then(response => response.json())
+        .then(hasil => {
+        var result = hasil.result;
              res.json({
                  creator : `${creator}`,
                  result
