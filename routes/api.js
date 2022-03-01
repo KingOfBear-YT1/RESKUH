@@ -680,6 +680,37 @@ res.sendFile(__path + '/views/apikey-not-found.html');
 }
 })
 
+router.get('/babi/tiktok', async (req, res, next) => {
+    var Apikey = req.query.apikey,
+        username = req.query.username
+
+	if(!Apikey) return res.json(loghandler.notparam)
+	if(listkey.includes(Apikey)){
+    if (!username) return res.json(loghandler.notusername)
+
+
+    TikTokScraper.getUserProfileInfo(username)
+        .then(user => {
+        var result = user;
+	    res.json({
+                status : true,
+                creator : `${creator}`,
+                result
+            })
+        })
+        .catch(e => {
+             res.json({
+                 status : false,
+                 creator : `${creator}`,
+                 message : "error, mungkin username anda tidak valid"
+             })
+         })
+   } else {
+res.json(loghandler.invalidKey)
+}
+})
+
+
 router.get('/download/tiktoknowm', async (req, res, next) => {
   const apikey = req.query.apikey;
   const url = req.query.url;
