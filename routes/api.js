@@ -1072,8 +1072,8 @@ router.get('/darkjoke', async (req, res, next) => {
     const Darkjoke = darkjoke[Math.floor(Math.random() * darkjoke.length)];
     let hasil = Darkjoke.darkjoke;
     data = await fetch(hasil).then(v => v.buffer())
-    await fs.writeFileSync(__path +'/tmp/darkjoke.jpeg', data)
-    res.sendFile(__path +'/tmp/darkjoke.jpeg')
+    await fs.writeFileSync(__path +'/tmp/darkjoke.jpg', data)
+    res.sendFile(__path +'/tmp/darkjoke.jpg')
   } else {
     res.json(loghandler.invalidKey)
   }
