@@ -2567,7 +2567,7 @@ router.get('/kuis/asahotak', async (req, res, next) => {
           .json({
               code: 200,
               success: true,
-              ...soal[~~(Math.random() * soal.length)]
+              ...soal[index(Math.random() * soal.length)]
           })
     } else {
         res.json(loghandler.invalidKey)
