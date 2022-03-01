@@ -405,23 +405,22 @@ router.get('/textmaker/quoteser', async(req, res, next) => {
   if(!query) return res.json(loghandler.notquery)
   
   if(listkey.includes(apikey)){
-  fetch(encodeURI(`https://viko-textmaker.herokuapp.com/api/textmaker?text=${query}`))
-  .then(response => response.json())
-        .then(hasil => {
-
-        var result = hasil.results;
-             res.json({
-                 status : true,
-                 creator : `${creator}`,
-                 result
-             })
-         })
-         .catch(e => {
-         	res.json(loghandler.error)
-})
-} else {
-  res.sendFile(__path + '/views/apikey-not-found.html');
-}
+        var soal = JSON.parse(
+            fs.readFileSync(__path + '/data/quotes.json')
+        )
+	res
+          .status(200)
+          .json({
+              code: 200,
+              success: true,
+	      creator: `${creator}`,
+	      result: {
+              	...soal[~~(Math.random() * soal.length)] 
+	      }
+          })
+    } else {
+        res.json(loghandler.invalidKey)
+    }
 })
 
 router.get('/textmaker/nulis2', async(req, res, next) => {
@@ -2567,7 +2566,10 @@ router.get('/kuis/asahotak', async (req, res, next) => {
           .json({
               code: 200,
               success: true,
-              ...soal[~~(Math.random() * soal.length)] 
+	      creator: `${creator}`,
+	      result: {
+             	...soal[~~(Math.random() * soal.length)] 
+	      }
           })
     } else {
         res.json(loghandler.invalidKey)
@@ -2587,6 +2589,7 @@ router.get('/kuis/family100', async (req, res, next) => {
           .json({
               code: 200,
               success: true,
+	      creator: `${creator}`,
               ...soal[~~(Math.random() * soal.length)] 
           })
     } else {
@@ -2607,6 +2610,7 @@ router.get('/kuis/siapakahaku', async (req, res, next) => {
           .json({
               code: 200,
               success: true,
+	      creator: `${creator}`,
 	      result: {
               	...soal[~~(Math.random() * soal.length)] 
 	      }
