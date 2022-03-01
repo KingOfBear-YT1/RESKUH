@@ -435,6 +435,33 @@ router.get('/card/welcome', async(req, res, next) => {
   }
 });
 
+router.get('/card/welcome2', async(req, res, next) => {
+  const apikey = req.query.apikey;
+  const nama = req.query.nama;
+  const descriminator = req.query.descriminator;
+  const memcount = req.query.memcount;
+  const gcname = req.query.gcname;
+  const gcicon = req.query.gcicon;
+  const pp = req.query.pp;
+  const bg = req.query.bg;
+  if(!nama) return res.json(loghandler.notnama)
+  if(!descriminator) return res.json(loghandler.descriminator)
+  if(!gcname) return res.json(loghandler.gcname)
+  if(!gcicon) return res.json(loghandler.gcicon)
+  if(!bg) return res.json(loghandler.bg)
+  if(!pp) return res.json(loghandler.pp)
+  if(!memcount) return res.json(loghandler.memcount)
+  if(!apikey) return res.json(loghandler.notparam)
+  if(listkey.includes(apikey)){
+  let hasil = `https://hadi-api.herokuapp.com/api/card/Welcome2?nama=${nama}&descriminator=${descriminator}&memcount=${memcount}&gcname=${gcname}&gcicon=${gcicon}&pp=${pp}&bg=${bg}`
+  data = await fetch(hasil).then(v => v.buffer())
+         await fs.writeFileSync(__path +'/tmp/welcome2.png', data)
+        res.sendFile(__path+'/tmp/welcome2.png')
+  } else {
+    res.json(loghandler.invalidKey)
+  }
+});
+
 router.get('/textmaker/quoteser', async(req, res, next) => {
   const apikey = req.query.apikey;
   const query = req.query.query;
