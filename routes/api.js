@@ -2561,14 +2561,13 @@ router.get('/kuis/asahotak', async (req, res, next) => {
     if(listkey.includes(Apikey)){
         var soal = JSON.parse(
             fs.readFileSync(__path + '/data/asahotak.json')
-        ).then(...soal[~~(Math.random() * soal.length)] => {
-        var result = ...soal[~~(Math.random() * soal.length)];
-        res
+        )
+	res
           .status(200)
           .json({
               code: 200,
               success: true,
-              result
+              result: ...soal[~~(Math.random() * soal.length)] 
           })
     } else {
         res.json(loghandler.invalidKey)
