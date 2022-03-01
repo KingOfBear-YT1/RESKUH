@@ -756,7 +756,7 @@ res.sendFile(__path + '/views/apikey-not-found.html');
 }
 })
 
-router.get('/downloader/pornhub', async(req, res, next) => {
+router.get('/download/pornhub', async(req, res, next) => {
   const apikey = req.query.apikey;
   const query = req.query.query;
   
@@ -771,8 +771,7 @@ router.get('/downloader/pornhub', async(req, res, next) => {
         var result = hasil.res;
              res.json({
                  status : true,
-                 creator : `${creator}`,
-                 result
+                 creator : `${creator}`
              })
          })
          .catch(e => {
