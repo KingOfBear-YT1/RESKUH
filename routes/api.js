@@ -916,12 +916,13 @@ router.get('/quotes', async (req, res, next) => {
     const Quotes = quotes[Math.floor(Math.random() * quotes.length)];
     let hasil = Quotes.quotes;
     data = await fetch(hasil).then(response => response.json())
-        .then(result => {
-        res.status(200).send({
-            status: 200, 
-            quotes: result.quotes, 
-            author: result.author
-        });
+        .then(data => {
+        var result = data;
+             res.json({
+                 creator : `${creator}`,
+                 result
+             })
+         })
          .catch(e => {
          	res.json(loghandler.error)
 })
