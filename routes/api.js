@@ -61,6 +61,10 @@ var {
 } = require("./../lib/utils/tiktok");
 
 var {
+  ttaudio
+} = require("./../lib/utils/ttaudio");
+
+var {
   ytDonlodMp3,
   ytDonlodMp4,
   ytPlayMp3,
@@ -693,16 +697,15 @@ res.sendFile(__path + '/views/apikey-not-found.html');
 }
 });
 
-router.get('/download/tiktoknowm', async (req, res, next) => {
-  const apikey = req.query.apikey;
-  const url = req.query.url;
-  if(!apikey) return res.json(loghandler.notparam)
-  if(!url) return res.json(loghandler.notquery)
-  
-  if(listkey.includes(apikey)){
-  fetch(encodeURI(`https://api.lolhuman.xyz/api/tiktok?apikey=KingOfBear&url=${url}`))
-  .then(response => response.json())
-        .then(data => {
+router.get('/download/tiktokvieww', async (req, res, next) => {
+    var Apikey = req.query.apikey,
+        url = req.query.url
+
+	if(!Apikey) return res.json(loghandler.notparam)
+	if(listkey.includes(Apikey)){
+     if (!url) return res.json(loghandler.noturl)
+     ttaudio(url)
+     .then(data => {
 
         var result = data.result;
              res.json({
@@ -717,7 +720,7 @@ router.get('/download/tiktoknowm', async (req, res, next) => {
 } else {
 res.sendFile(__path + '/views/apikey-not-found.html');
 }
-})
+});
 
 router.get('/download/tiktokview', async (req, res, next) => {
   const apikey = req.query.apikey;
