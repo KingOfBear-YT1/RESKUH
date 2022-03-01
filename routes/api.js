@@ -756,28 +756,32 @@ res.sendFile(__path + '/views/apikey-not-found.html');
 }
 })
 
-router.get('/download/ig2', async(req, res, next) => {
-  const url = req.query.url;
+router.get('/downloader/pornhub', async(req, res, next) => {
   const apikey = req.query.apikey;
-  if(!url) return res.json(loghandler.noturl)
+  const query = req.query.query;
+  
+  if(!query) return res.json(loghandler.notquery)
   if(!apikey) return res.json(loghandler.notparam)
+  
   if(listkey.includes(apikey)){
-  igdl(url)
-    .then((result) => {
-      res.json({
-        status: true,
-        code: 200,
-        creator: `${creator}`,
-        result
-      })
-    })
-    .catch((error) => {
-      res.json(error)
-    });
-    } else {
-    	res.json(loghandler.invalidKey)
-    }
-});
+    fetch(encodeURI(`http://kocakz.herokuapp.com/api/media/pornhub/search?query=${query}`))
+    .then(response => response.json())
+        .then(hasil => {
+
+        var result = hasil.res;
+             res.json({
+                 status : true,
+                 creator : `${creator}`,
+                 result
+             })
+         })
+         .catch(e => {
+         	res.json(loghandler.error)
+})
+} else {
+  res.json(loghandler.invalidKey)
+}
+})
 
 router.get('/download/fb', async (req, res, next) => {
 
