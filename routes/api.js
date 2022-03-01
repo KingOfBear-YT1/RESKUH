@@ -900,8 +900,10 @@ router.get('/quotes', async (req, res, next) => {
   if(!Apikey) return res.json(loghandler.notparam)
   if(listkey.includes(Apikey)) {
     const quotes = JSON.parse(fs.readFileSync(__path +'/data/quotes.json'));
-    const Quotes = quotes[Math.floor(Math.random() * quotes.length)];
-    let hasil = Quotes.quotes;
+    function pickRandom(list) {
+  return list[Math.floor(list.length * Math.random())]
+}
+    let hasil = pickRandom(quotes);
     data = await fetch(hasil).then(response => response.json())
         .then(data => {
         var result = data;
