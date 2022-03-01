@@ -48,6 +48,17 @@ var {
 } = require("./../lib/utils/photooxy");
 
 var {
+  ttdownloader,
+  pinterest,
+  fbdown,
+  igstalk,
+  igstory,
+  igdl,
+  linkwa,
+  igDownloader
+} = require("./../lib/utils/anjay");
+
+var {
   igStalk,
   igDownload
 } = require("./../lib/utils/ig");
@@ -720,30 +731,49 @@ res.sendFile(__path + '/views/apikey-not-found.html');
 })
 
 router.get('/download/ig', async(req, res, next) => {
-  const apikey = req.query.apikey;
   const url = req.query.url;
-  
+  const apikey = req.query.apikey;
   if(!url) return res.json(loghandler.noturl)
   if(!apikey) return res.json(loghandler.notparam)
-  
   if(listkey.includes(apikey)){
-    fetch(encodeURI(`https://api.lolhuman.xyz/api/instagram?apikey=KingOfBear&url=${url}`))
-    .then(response => response.json())
-        .then(data => {
-        var result = data.result;
-             res.json({
-               status: true,
-               code: 200,
-               creator: `${creator}`,
-                 result
-             })
-         })
-         .catch(e => {
-         	res.json(loghandler.error)
-})
-  } else {
-    res.sendFile(__path + '/views/apikey-not-found.html');
-  }
+  igDownloader(url)
+    .then((result) => {
+      res.json({
+        status: true,
+        code: 200,
+        creator: `${creator}`,
+        result
+      })
+    })
+    .catch((error) => {
+      res.json(error)
+    });
+    } else {
+    	res.json(loghandler.invalidKey)
+    }
+});
+
+router.get('/download/ig2', async(req, res, next) => {
+  const url = req.query.url;
+  const apikey = req.query.apikey;
+  if(!url) return res.json(loghandler.noturl)
+  if(!apikey) return res.json(loghandler.notparam)
+  if(listkey.includes(apikey)){
+  igdl(url)
+    .then((result) => {
+      res.json({
+        status: true,
+        code: 200,
+        creator: `${creator}`,
+        result
+      })
+    })
+    .catch((error) => {
+      res.json(error)
+    });
+    } else {
+    	res.json(loghandler.invalidKey)
+    }
 });
 
 router.get('/download/fb', async (req, res, next) => {
