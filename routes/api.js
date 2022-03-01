@@ -9,6 +9,7 @@ var zahirr = db.get("zahirr");
 }
  
 var creator = "King Of Bear"
+var lolkey = "KingOfBear"
 const brainly = require('brainly-scraper');
 var si = require('systeminformation');
 var secure = require('ssl-express-www');
@@ -736,22 +737,24 @@ router.get('/download/ig', async(req, res, next) => {
   if(!url) return res.json(loghandler.noturl)
   if(!apikey) return res.json(loghandler.notparam)
   if(listkey.includes(apikey)){
-  igDownloader(url)
-    .then((result) => {
-      res.json({
-        status: true,
-        code: 200,
-        creator: `${creator}`,
-        result
-      })
-    })
-    .catch((error) => {
-      res.json(error)
-    });
-    } else {
-    	res.json(loghandler.invalidKey)
-    }
-});
+  fetch(encodeURI(`https://api.lolhuman.xyz/api/instagram?apikey=${lolkey}&url=${url}`))
+  .then(response => response.json())
+        .then(data => {
+
+        var result = data.result;
+             res.json({
+                 status : true,
+                 creator : `${creator}`,
+                 result
+             })
+         })
+         .catch(e => {
+         	res.json(loghandler.error)
+})
+} else {
+res.sendFile(__path + '/views/apikey-not-found.html');
+}
+})
 
 router.get('/download/ig2', async(req, res, next) => {
   const url = req.query.url;
