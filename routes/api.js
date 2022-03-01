@@ -916,8 +916,8 @@ router.get('/quotes', async (req, res, next) => {
     const Quotes = quotes[Math.floor(Math.random() * quotes.length)];
     let hasil = Quotes.quotes;
     data = await fetch(hasil).then(response => response.json())
-        .then(data => {
-        var result = data;
+        .then(result => {
+        var result = result;
              res.json({
                  creator : `${creator}`,
                  result
