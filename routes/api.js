@@ -2594,6 +2594,28 @@ router.get('/kuis/family100', async (req, res, next) => {
     }
 })
 
+router.get('/kuis/siapakahaku', async (req, res, next) => {
+    var Apikey = req.query.apikey
+
+    if(!Apikey) return res.json(loghandler.notparam)
+    if(listkey.includes(Apikey)){
+        var soal = JSON.parse(
+            fs.readFileSync(__path + '/data/siapakahaku.json')
+        )
+	res
+          .status(200)
+          .json({
+              code: 200,
+              success: true,
+	      result: {
+              	...soal[~~(Math.random() * soal.length)] 
+	      }
+          })
+    } else {
+        res.json(loghandler.invalidKey)
+    }
+})
+
 router.get("/photooxy/shadow", async(req, res, next) => {
   const text1 = req.query.text;
   const apikey = req.query.apikey;
