@@ -2504,23 +2504,22 @@ router.get('/kuis/tebakbendera', async (req, res, next) => {
         var Apikey = req.query.apikey
 	if(!Apikey) return res.json(loghandler.notparam)
 	if(listkey.includes(Apikey)){
-       fetch(encodeURI(`https://api.lolhuman.xyz/api/tebak/bendera?apikey=KingOfBear`))
-  .then(response => response.json())
-        .then(data => {
-
-        var result = data.result;
-             res.json({
-                 status : true,
-                 creator : `${creator}`,
-                 result
-             })
-         })
-         .catch(e => {
-         	res.json(loghandler.error)
-})
-} else {
-res.sendFile(__path + '/views/apikey-not-found.html');
-}
+        var soal = JSON.parse(
+            fs.readFileSync(__path + '/data/tebakbendera.json')
+        )
+	res
+          .status(200)
+          .json({
+              code: 200,
+              success: true,
+	      creator: `${creator}`,
+	      result: {
+              	...soal[~~(Math.random() * soal.length)] 
+	      }
+          })
+    } else {
+        res.json(loghandler.invalidKey)
+    }
 })
 
 router.get('/kuis/tebakGambar', async (req, res, next) => {
