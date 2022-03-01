@@ -57,6 +57,10 @@ var {
 } = require("./../lib/utils/pinterest");
 
 var {
+  tiktokDown
+} = require("./../lib/utils/tiktok");
+
+var {
   ytDonlodMp3,
   ytDonlodMp4,
   ytPlayMp3,
@@ -671,14 +675,23 @@ router.get('/download/tiktok', async (req, res, next) => {
 	if(!Apikey) return res.json(loghandler.notparam)
 	if(listkey.includes(Apikey)){
      if (!url) return res.json(loghandler.noturl)
-     Tiktok(url)
-     .then((data) => {
-       res.json(data)
-     })
-    } else {
+     tiktokDown(url)
+     .then(data => {
+
+        var result = data.result;
+             res.json({
+                 status : true,
+                 creator : `${creator}`,
+                 result
+             })
+         })
+         .catch(e => {
+         	res.json(loghandler.error)
+})
+} else {
 res.sendFile(__path + '/views/apikey-not-found.html');
 }
-})
+});
 
 router.get('/download/tiktoknowm', async (req, res, next) => {
   const apikey = req.query.apikey;
