@@ -771,7 +771,7 @@ router.get('/download/pornhub', async(req, res, next) => {
         var result = hasil.res;
              res.json({
                  status : true,
-                 creator : `${creator}`
+                 creator : `${creator}`,
              })
          })
          .catch(e => {
