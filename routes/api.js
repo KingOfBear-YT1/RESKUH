@@ -1095,6 +1095,22 @@ router.get('/loli', async (req, res, next) => {
   }
 });
 
+router.get('/nsfwloli', async (req, res, next) => {
+  Apikey = req.query.apikey;
+  
+  if(!Apikey) return res.json(loghandler.notparam)
+  if(listkey.includes(Apikey)) {
+    const nsfwloli = JSON.parse(fs.readFileSync(__path +'/data/NsfwLoli.json'));
+    const NsfwLoli = nsfwloli[Math.floor(Math.random() * nsfwloli.length)];
+    let hasil = NsfwLoli.nsfwloli;
+    data = await fetch(hasil).then(v => v.buffer())
+    await fs.writeFileSync(__path +'/tmp/nsfwloli.jpeg', data)
+    res.sendFile(__path +'/tmp/nsfwloli.jpeg')
+  } else {
+    res.json(loghandler.invalidKey)
+  }
+});
+
 router.get('/random/couple', async (req, res, next) => {
         var Apikey = req.query.apikey
             
