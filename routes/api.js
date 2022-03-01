@@ -1063,15 +1063,13 @@ router.get("/sertifikat/ttp", async (req, res, next) => {
   }
 });
 
-router.get("/darkjokes", async (req, res, next) => {
+router.get('/darkjoke', async (req, res, next) => {
+  Apikey = req.query.apikey;
   
-  apikey = req.query.apikey;
-  
-  if(!apikey) return res.json(loghandler.notparam)
-  
-  if(listkey.includes(apikey)) {
+  if(!Apikey) return res.json(loghandler.notparam)
+  if(listkey.includes(Apikey)) {
     const darkjoke = JSON.parse(fs.readFileSync(__path +'/data/darkjoke.json'));
-    const Darkjoke = darkjoke[Math.floor(Math.random() * darkjoke.length)];
+    const DarkJoke = darkjoke[Math.floor(Math.random() * darkjoke.length)];
     let hasil = Darkjoke.darkjoke;
     data = await fetch(hasil).then(v => v.buffer())
     await fs.writeFileSync(__path +'/tmp/darkjoke.jpeg', data)
