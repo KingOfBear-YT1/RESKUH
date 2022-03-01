@@ -462,7 +462,7 @@ router.get("/pinterest", async(req, res, next) => {
 		    status : true,
                     creator : `${creator}`,
 		    url_download,
-		    'author' : 'KING OF BEAR,VIKO, ITSKHYAA, FDCIABDUL'
+		    'author' : 'KING OF BEAR, VIKO, ITSKHYAA, FDCIABDUL'
 	    });
         })
         .catch((error) => {
@@ -892,6 +892,30 @@ router.get('/cerpen/random', async (req, res, next) => {
 
        fetch(encodeURI(`http://viko-cerpenmu.herokuapp.com/`))
         .then(response => response.json())
+        .then(data => {
+        var result = data;
+             res.json({
+                 creator : `${creator}`,
+                 result
+             })
+         })
+         .catch(e => {
+         	res.json(loghandler.error)
+})
+} else {
+res.sendFile(__path + '/views/apikey-not-found.html');
+}
+})
+
+router.get('/quotes', async (req, res, next) => {
+  Apikey = req.query.apikey;
+  
+  if(!Apikey) return res.json(loghandler.notparam)
+  if(listkey.includes(Apikey)) {
+    const quotes = JSON.parse(fs.readFileSync(__path +'/data/quotes.json'));
+    const Quotes = quotes[Math.floor(Math.random() * quotes.length)];
+    let hasil = Quotes.quotes;
+    data = await fetch(hasil).then(response => response.json())
         .then(data => {
         var result = data;
              res.json({
