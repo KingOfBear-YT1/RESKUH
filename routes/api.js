@@ -3715,6 +3715,21 @@ router.get('/asupan', async (req, res, next) => {
     res.json(loghandler.invalidKey)
   }
 });
+
+router.get('/asupan2', async (req, res, next) => {
+  Apikey = req.query.apikey;
+  
+  if(!Apikey) return res.json(loghandler.notparam)
+  if(listkey.includes(Apikey)) {
+  const Asupan = JSON.parse(fs.readFileSync(__path +'/data/asupantiktok.json'));
+  const randAsupan = Asupan[Math.floor(Math.random() * Asupan.length)];
+  data = await fetch(randAsupan).then(v => v.buffer())
+  await fs.writeFileSync(__path +'/tmp/asupan.mp4', data)
+  res.sendFile(__path +'/tmp/asupan.mp4')
+  } else {
+    res.json(loghandler.invalidKey)
+  }
+});
  
 router.get("/maker/nulis", async (req, res, next) => {
   const apikey = req.query.apikey;
