@@ -2597,6 +2597,27 @@ router.get('/kuis/asahotak', async (req, res, next) => {
     }
 })
 
+router.get('/kuis/tebakjenaka', async (req, res, next) => {
+    var Apikey = req.query.apikey
+
+    if(!Apikey) return res.json(loghandler.notparam)
+    if(listkey.includes(Apikey)){
+        var soal = JSON.parse(
+            fs.readFileSync(__path + '/data/tebakjenaka.json')
+        )
+	res
+          .status(200)
+          .json({
+              code: 200,
+              success: true,
+	      creator: `${creator}`,
+             	...soal[~~(Math.random() * soal.length)] 
+          })
+    } else {
+        res.json(loghandler.invalidKey)
+    }
+})
+
 router.get('/kuis/tebakkalimat', async (req, res, next) => {
     var Apikey = req.query.apikey
 
