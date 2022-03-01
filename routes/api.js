@@ -2301,21 +2301,21 @@ res.json(loghandler.invalidKey)
 }
 })
 
-router.get("/random/memeindo", async (req, res, next) => {
+router.get('/random/memeindo', async (req, res, next) => {
+  Apikey = req.query.apikey;
   
-  apikey = req.query.apikey;
-  
-  if(!apikey) return res.json(loghandler.notparam)
-  
-  if(listkey.includes(apikey)) {
-    let hasil = 'https://api.lolhuman.xyz/api/meme/memeindo?apikey=KingOfBear' 
+  if(!Apikey) return res.json(loghandler.notparam)
+  if(listkey.includes(Apikey)) {
+    const memeindo = JSON.parse(fs.readFileSync(__path +'/data/memeindo.json'));
+    const Memeindo = memeindo[Math.floor(Math.random() * memeindo.length)];
+    let hasil = Memeindo.memeindo;
     data = await fetch(hasil).then(v => v.buffer())
     await fs.writeFileSync(__path +'/tmp/memeindo.jpeg', data)
     res.sendFile(__path +'/tmp/memeindo.jpeg')
   } else {
-    res.sendFile(__path + '/views/apikey-not-found.html');
+    res.json(loghandler.invalidKey)
   }
-})
+});
 
 
 router.get('/info/kodepos', async (req, res, next) => {
