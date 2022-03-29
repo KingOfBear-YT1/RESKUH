@@ -196,7 +196,7 @@ loghandler = {
 Akhir Pesan Error
 */
 router.use(favicon(__path + "/views/favicon.ico"));
-var listkey = ['KingOfBear', 'KINGOFBEAR', 'Riska', 'Utomodwiramadhan', 'https://youtu.be/JNuiRPRysuk']
+var listkey = ['KingOfBear', 'KINGOFBEAR', 'Riska', 'Utomodwiramadhan', 'https://youtu.be/JNuiRPRysuk', 'FreeApikey']
 
 router.post("/apikey", async (req, res, next) => {
   const key = req.query.key;
