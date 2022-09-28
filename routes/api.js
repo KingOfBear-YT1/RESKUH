@@ -2572,27 +2572,21 @@ res.json(loghandler.invalidKey)
 }
 })
 
-router.get('/random/meme', async (req, res, next) => {
-        var Apikey = req.query.apikey
-            
-	if(!Apikey) return res.json(loghandler.notparam)
-	if(listkey.includes(Apikey)){
-
-       fetch(encodeURI(`https://rest-api-memeindo.vercel.app/api/image/random`))
-        .then(response => response.json())
-        .then(data => {
-        var result = data.data;
-             res.json({
-                 result
-             })
-         })
-         .catch(e => {
-         	res.json(loghandler.error)
-})
-} else {
-res.json(loghandler.invalidKey)
-}
-})
+router.get('/memeindo', async (req, res, next) => {
+  Apikey = req.query.apikey;
+  
+  if(!Apikey) return res.json(loghandler.notparam)
+  if(listkey.includes(Apikey)) {
+    const loli = JSON.parse(fs.readFileSync(__path +'/data/memeindo.json'));
+    const Memeindo = memeindo[Math.floor(Math.random() * memeindo.length)];
+    let hasil = Memeindo.memeindo;
+    data = await fetch(hasil).then(v => v.buffer())
+    await fs.writeFileSync(__path +'/tmp/memeindo.jpeg', data)
+    res.sendFile(__path +'/tmp/memeindo.jpeg')
+  } else {
+    res.json(loghandler.invalidKey)
+  }
+});
 
 
 router.get('/info/kodepos', async (req, res, next) => {
