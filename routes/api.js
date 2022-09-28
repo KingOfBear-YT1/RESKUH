@@ -2572,18 +2572,17 @@ res.json(loghandler.invalidKey)
 }
 })
 
-router.get('/random/memeindo', async (req, res, next) => {
-  var Apikey = req.query.apikey;
-  
-  if(listkey.includes(apikey)){
-  fetch(encodeURI(`https://rest-api-memeindo.vercel.app/api/image/random`))
-  .then(response => response.json())
-        .then(hasil => {
+router.get('/random/meme', async (req, res, next) => {
+        var Apikey = req.query.apikey
+            
+	if(!Apikey) return res.json(loghandler.notparam)
+	if(listkey.includes(Apikey)){
 
-        var result = hasil.data;
+       fetch(encodeURI(`https://rest-api-memeindo.vercel.app/api/image/random`))
+        .then(response => response.json())
+        .then(data => {
+        var result = data.data;
              res.json({
-                 status : true,
-                 creator : `${creator}`,
                  result
              })
          })
@@ -2591,7 +2590,7 @@ router.get('/random/memeindo', async (req, res, next) => {
          	res.json(loghandler.error)
 })
 } else {
-  res.json(loghandler.invalidKey)
+res.json(loghandler.invalidKey)
 }
 })
 
