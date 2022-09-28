@@ -2577,7 +2577,7 @@ router.get('/memeindo', async (req, res, next) => {
   
   if(!Apikey) return res.json(loghandler.notparam)
   if(listkey.includes(Apikey)) {
-    const loli = JSON.parse(fs.readFileSync(__path +'/data/memeindo.json'));
+    const memeindo = JSON.parse(fs.readFileSync(__path +'/data/memeindo.json'));
     const Memeindo = memeindo[Math.floor(Math.random() * memeindo.length)];
     let hasil = Memeindo.memeindo;
     data = await fetch(hasil).then(v => v.buffer())
