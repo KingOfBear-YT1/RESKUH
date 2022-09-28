@@ -2575,14 +2575,15 @@ res.json(loghandler.invalidKey)
 router.get('/random/memeindo', async (req, res, next) => {
   var Apikey = req.query.apikey;
   
-  if(!Apikey) return res.json(loghandler.notparam)
-	if(listkey.includes(Apikey)){
+  if(listkey.includes(apikey)){
+  fetch(encodeURI(`https://itskhyaa-textmaker.herokuapp.com/api/nulis?text=${text}`))
+  .then(response => response.json())
+        .then(hasil => {
 
-       fetch(encodeURI(`https://rest-api-memeindo.vercel.app/api/image/random`))
-        .then(response => response.json())
-        .then(data => {
-        var result = data;
+        var result = hasil.data;
              res.json({
+                 status : true,
+                 creator : `${creator}`,
                  result
              })
          })
@@ -2590,7 +2591,7 @@ router.get('/random/memeindo', async (req, res, next) => {
          	res.json(loghandler.error)
 })
 } else {
-res.json(loghandler.invalidKey)
+  res.json(loghandler.invalidKey)
 }
 })
 
