@@ -2576,7 +2576,7 @@ router.get('/random/memeindo', async (req, res, next) => {
   var Apikey = req.query.apikey;
   
   if(listkey.includes(apikey)){
-  fetch(encodeURI(`https://itskhyaa-textmaker.herokuapp.com/api/nulis?text=${text}`))
+  fetch(encodeURI(`https://rest-api-memeindo.vercel.app/api/image/random`))
   .then(response => response.json())
         .then(hasil => {
 
