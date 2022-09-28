@@ -1,5 +1,5 @@
 {
-  "name": "api-viko",
+  "name": "kingofbear-api",
   "version": "1.9.0",
   "description": "My Rest Api free",
   "main": "nodemon index.js",
