@@ -173,7 +173,7 @@ loghandler = {
         status: false,
         creator: `${creator}`,
         code: 404,
-        result: 'APIKEY SALAH, pastikan anda pernah berlangganan di https://apikey-bear3.herokuapp.com/docs'
+        result: 'APIKEY SALAH, pastikan anda pernah berlangganan di https://saipulanuar.herokuapp.com'
     },
     invalidlink: {
         status: false,
