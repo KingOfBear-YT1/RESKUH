@@ -2572,7 +2572,7 @@ res.json(loghandler.invalidKey)
 }
 })
 
-router.get('/memeindo', async (req, res, next) => {
+router.get('/memeh', async (req, res, next) => {
   Apikey = req.query.apikey;
   
   if(!Apikey) return res.json(loghandler.notparam)
@@ -2581,8 +2581,8 @@ router.get('/memeindo', async (req, res, next) => {
     const Memeindo = memeindo[Math.floor(Math.random() * memeindo.length)];
     let hasil = Memeindo.memeindo;
     data = await fetch(hasil).then(v => v.buffer())
-    await fs.writeFileSync(__path +'/tmp/memeindo.jpag', data)
-    res.sendFile(__path +'/tmp/memeindo.jpag')
+    await fs.writeFileSync(__path +'/tmp/memeindo.jpeg', data)
+    res.sendFile(__path +'/tmp/memeindo.jpeg')
   } else {
     res.json(loghandler.invalidKey)
   }
