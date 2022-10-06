@@ -73,10 +73,6 @@ var {
 } = require("./../lib/utils/pinterest");
 
 var {
-  tiktokDown
-} = require("./../lib/utils/tiktok");
-
-var {
   ytDonlodMp3,
   ytDonlodMp4,
   ytPlayMp3,
