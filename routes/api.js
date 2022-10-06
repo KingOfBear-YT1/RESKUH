@@ -59,9 +59,6 @@ var {
   igDownloader
 } = require("./../lib/utils/anjay");
 
-var {
-  ttdl
-} = require("./../lib/utils/scraper");
 
 var {
   igStalk,
@@ -843,7 +840,7 @@ router.get('/download/tiktok', async (req, res, next) => {
   if (!data.video ) return res.json(loghandler.notquery)
   
   if(listkey.includes(apikey)){
-  ttdl(url)
+  fetch(encodeURI(`https://api.lolhuman.xyz/api/tiktok?apikey=KingOfBear&url=${url}`))
         .then(data => {
 	
         var result = data;
