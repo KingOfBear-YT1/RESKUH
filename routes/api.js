@@ -60,6 +60,10 @@ var {
 } = require("./../lib/utils/anjay");
 
 var {
+  ttdl
+} = require("./../lib/utils/scraper");
+
+var {
   igStalk,
   igDownload
 } = require("./../lib/utils/ig");
