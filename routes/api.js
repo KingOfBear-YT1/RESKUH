@@ -843,8 +843,7 @@ router.get('/download/tiktok', async (req, res, next) => {
   if(listkey.includes(apikey)){
   ttdl(url)
         .then(data => {
-	if (!data.video ) return res.json(loghandler.noturl)
-        var result = data;
+        var result = data.result;
              res.json({
                  status : true,
                  creator : `${creator}`,
