@@ -834,30 +834,28 @@ router.get('/yt/search', async(req, res, next) => {
      }
 });
 
-router.get('/downloader/tiktok', async (req, res, next) => {
-	var url = req.query.url
-	if (!url ) return res.json(loghandler.noturl)
-	
-	var apikey = req.query.apikey
-	if (!apikey) return res.json(loghandler.notapikey)
-	if(listkey.includes(apikey)){
+router.get('/download/tiktok', async (req, res, next) => {
+  const apikey = req.query.apikey;
+  const url = req.query.url;
+  if(!apikey) return res.json(loghandler.notparam)
+  if(!url) return res.json(loghandler.notquery)
+  
+  if(listkey.includes(apikey)){
+  ttdl(url)
+        .then(data => {
 
-ttdl(url)
-.then(data => {
-	if (!data.video ) return res.json(loghandler.noturl)
-	var result = data
-	res.json({
-	status: true,
-	creator: `${creator}`,
-		result
-	})
-	})
-	 .catch(e => {
-	
-		res.json(loghandler.noturl)
+        var result = data;
+             res.json({
+                 status : true,
+                 creator : `${creator}`,
+                 result
+             })
+         })
+         .catch(e => {
+         	res.json(loghandler.error)
 })
 } else {
-  res.json(loghandler.notapikey)
+res.sendFile(__path + '/views/apikey-not-found.html');
 }
 })
 
