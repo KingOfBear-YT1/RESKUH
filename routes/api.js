@@ -837,13 +837,15 @@ router.get('/yt/search', async(req, res, next) => {
 router.get('/download/tiktok', async (req, res, next) => {
   const apikey = req.query.apikey;
   const url = req.query.url;
+  const data.video = req.query.url
   if(!apikey) return res.json(loghandler.notparam)
   if(!url) return res.json(loghandler.notquery)
+  if (!data.video ) return res.json(loghandler.notquery)
   
   if(listkey.includes(apikey)){
   ttdl(url)
         .then(data => {
-	if (!data.video ) return res.json(loghandler.notquery)
+	
         var result = data;
              res.json({
                  status : true,
