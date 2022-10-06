@@ -79,8 +79,9 @@ var {
 
 var { 
   Joox, 
-  FB, 
-  Tiktok
+  FB,
+  Tiktok,
+  mediafiredownloader
 } = require("./../lib/utils/downloader");
 
 var {
@@ -717,6 +718,30 @@ router.get('/f/botkuh', async(req, res, next) => {
   res.sendFile(__path + '/views/apikey-not-found.html');
 }
 })
+
+router.get('/download/mediafire', async(req, res, next) => {
+  const url = req.query.url;
+  const apikey = req.query.apikey;
+  if(!url) return res.json(loghandler.noturl)
+  if(!apikey) return res.json(loghandler.notparam)
+  if(listkey.includes(apikey)){
+  mediafiredownloader(url)
+    .then((result) => {
+      res.json({
+        status: true,
+        code: 200,
+        creator: `${creator}`,
+        result
+      })
+    })
+    .catch((error) => {
+      console.log(error)
+      res.json(error)
+    });
+    } else {
+      res.sendFile(__path + '/views/apikey-not-found.html');
+    }
+});
 
 router.get('/download/ytmp3', async(req, res, next) => {
   const url = req.query.url;
