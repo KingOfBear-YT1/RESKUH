@@ -179,6 +179,12 @@ loghandler = {
         code: 406,
         message: 'masukan parameter username'
     },
+    notid: {
+        status: false,
+        creator: `${creator}`,
+        code: 406,
+        message: 'masukan parameter id'
+    },
     notvalue: {
         status: false,
         creator: `${creator}`,
@@ -1675,17 +1681,17 @@ res.sendFile(__path + '/views/apikey-not-found.html');
 }
 })
 
-router.get('/id/epep', async (req, res, next) => {
+router.get('/stalk/epep', async (req, res, next) => {
   const apikey = req.query.apikey;
-  const text = req.query.text;
+  const text = req.query.id;
   
-  if(!text) return res.json(loghandler.nottext)
+  if(!text) return res.json(loghandler.notid)
   if(!apikey) return res.json(loghandler.notparam)
   
   if(listkey.includes(apikey)){
     stalkff(text)
-        .then(data => {
-        var result = data;
+        .then(hasil => {
+        var result = hasil;
              res.json({
                status: true,
                code: 200,
