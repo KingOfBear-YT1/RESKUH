@@ -84,6 +84,10 @@ var {
   mediafiredownloader
 } = require("./../lib/utils/downloader");
 
+var { 
+  ttdl
+} = require("./../lib/utils/scraper");
+
 var {
   Cuaca, 
   Lirik
@@ -881,6 +885,32 @@ router.get('/download/tiktok', async (req, res, next) => {
 res.sendFile(__path + '/views/apikey-not-found.html');
 }
 })
+
+router.get('/download/tiktokmp3', async(req, res, next) => {
+  const apikey = req.query.apikey;
+  const url = req.query.url;
+  
+  if(!url) return res.json(loghandler.noturl)
+  if(!apikey) return res.json(loghandler.notparam)
+  
+  if(listkey.includes(apikey)){
+    ttdl(url)
+        .then(result => {
+        var result = result;
+             res.json({
+               status: true,
+               code: 200,
+               creator: `${creator}`,
+                 result
+             })
+         })
+         .catch(e => {
+          res.json(loghandler.error)
+})
+  } else {
+    res.sendFile(__path + '/views/apikey-not-found.html');
+  }
+});
 
 router.get('/download/tiktokview', async (req, res, next) => {
   const apikey = req.query.apikey;
