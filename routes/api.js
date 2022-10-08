@@ -89,7 +89,8 @@ var {
   fbdl,
   soundcloud,
   telesticker,
-  stickersearch
+  stickersearch,
+  ssweb
 } = require("./../lib/utils/scraper");
 
 var {
@@ -960,6 +961,28 @@ router.get('/download/stickersearch', async(req, res, next) => {
              })
          })
          .catch(e => {
+          res.json(loghandler.error)
+})
+  } else {
+    res.sendFile(__path + '/views/apikey-not-found.html');
+  }
+});
+
+router.get('/download/ssweb', async(req, res, next) => {
+  var url = req.query.url
+  var apikey = req.query.apikey
+  
+  if (!url) return res.json(loghandler.noturl)  
+  if (!apikey) return res.json(loghandler.notapikey)
+  if(listkey.includes(apikey)){
+  
+  ssweb(url)
+  .then((data) =>{ 
+    if (!data) return res.json(loghandler.notfound)
+    res.set({'Content-Type': 'image/png'})
+    res.send(data)
+  })
+           .catch(e => {
           res.json(loghandler.error)
 })
   } else {
