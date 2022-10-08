@@ -867,8 +867,7 @@ router.get('/download/tiktok', async (req, res, next) => {
   const url = req.query.url;
   if(!apikey) return res.json(loghandler.notparam)
   if(!url) return res.json(loghandler.notquery)
-  if (!data.video ) return res.json(loghandler.notquery)
-  
+	
   if(listkey.includes(apikey)){
   fetch(encodeURI(`https://api.lolhuman.xyz/api/tiktok?apikey=KingOfBear&url=${url}`))
         .then(data => {
