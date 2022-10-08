@@ -92,7 +92,8 @@ var {
   stickersearch,
   ssweb,
   tafsirsurah,
-  linkwa
+  linkwa,
+  styletext
 } = require("./../lib/utils/scraper");
 
 var {
@@ -1003,6 +1004,32 @@ router.get('/download/linkwa', async(req, res, next) => {
     linkwa(nama)
         .then(result => {
         var result = result;
+             res.json({
+               status: true,
+               code: 200,
+               creator: `${creator}`,
+                 result
+             })
+         })
+         .catch(e => {
+          res.json(loghandler.error)
+})
+  } else {
+    res.sendFile(__path + '/views/apikey-not-found.html');
+  }
+});
+
+router.get('/textpro/styletext', async(req, res, next) => {
+  const apikey = req.query.apikey;
+  const teks = req.query.text;
+  
+  if(!teks) return res.json(loghandler.nottext)
+  if(!apikey) return res.json(loghandler.notparam)
+  
+  if(listkey.includes(apikey)){
+    styletext(teks)
+        .then(hasil => {
+        var result = hasil;
              res.json({
                status: true,
                code: 200,
