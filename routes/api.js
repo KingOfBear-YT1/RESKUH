@@ -85,7 +85,8 @@ var {
 } = require("./../lib/utils/downloader");
 
 var { 
-  ttdl
+  ttdl,
+  fbdl
 } = require("./../lib/utils/scraper");
 
 var {
@@ -1045,30 +1046,30 @@ router.get('/download/xnxx', async(req, res, next) => {
 })
 
 router.get('/download/fb', async (req, res, next) => {
-
-        var Apikey = req.query.apikey,
-            url = req.query.url
-            
-	if(!Apikey) return res.json(loghandler.notparam)
-	if(listkey.includes(Apikey)){
-    fetch(encodeURI(`https://api.lolhuman.xyz/api/facebook?apikey=KingOfBear&url=${url}`))
-  .then(response => response.json())
+  const apikey = req.query.apikey;
+  const url = req.query.url;
+  
+  if(!url) return res.json(loghandler.noturl)
+  if(!apikey) return res.json(loghandler.notparam)
+  
+  if(listkey.includes(apikey)){
+    fbdl(url)
         .then(data => {
-
-        var result = data.result;
+        var result = data;
              res.json({
-                 status : true,
-                 creator : `${creator}`,
+               status: true,
+               code: 200,
+               creator: `${creator}`,
                  result
              })
          })
          .catch(e => {
-         	res.json(loghandler.error)
+          res.json(loghandler.error)
 })
-} else {
-res.sendFile(__path + '/views/apikey-not-found.html');
-}
-})
+  } else {
+    res.sendFile(__path + '/views/apikey-not-found.html');
+  }
+});
 
 router.get('/stalk/tiktok', async (req, res, next) => {
   const apikey = req.query.apikey;
