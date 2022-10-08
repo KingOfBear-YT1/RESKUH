@@ -90,7 +90,8 @@ var {
   soundcloud,
   telesticker,
   stickersearch,
-  ssweb
+  ssweb,
+  tafsirsurah
 } = require("./../lib/utils/scraper");
 
 var {
@@ -1978,6 +1979,32 @@ router.get('/muslim/quran', async (req, res, next) => {
 res.json(loghandler.invalidKey)
 }
 })
+
+router.get('/muslim/tafsirsurah', async(req, res, next) => {
+  const apikey = req.query.apikey;
+  const query = req.query.query;
+  
+  if(!query) return res.json(loghandler.notquery)
+  if(!apikey) return res.json(loghandler.notparam)
+  
+  if(listkey.includes(apikey)){
+    tafsirsurah(query)
+        .then(result=> {
+        var result = result;
+             res.json({
+               status: true,
+               code: 200,
+               creator: `${creator}`,
+                 result
+             })
+         })
+         .catch(e => {
+          res.json(loghandler.error)
+})
+  } else {
+    res.sendFile(__path + '/views/apikey-not-found.html');
+  }
+});
 
 router.get('/muslim/tahlil', async (req, res, next) => {
         var Apikey = req.query.apikey
