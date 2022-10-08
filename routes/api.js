@@ -94,7 +94,8 @@ var {
   tafsirsurah,
   linkwa,
   styletext,
-  wikimedia
+  wikimedia,
+  chara
 } = require("./../lib/utils/scraper");
 
 var {
@@ -1764,6 +1765,32 @@ router.get('/random/wallpaper', async(req, res, next) => {
          })
          .catch(e => {
          	res.json(loghandler.error)
+})
+  } else {
+    res.sendFile(__path + '/views/apikey-not-found.html');
+  }
+});
+
+router.get('/wallpaper/chara', async(req, res, next) => {
+  const apikey = req.query.apikey;
+  const query = req.query.query;
+  
+  if(!query) return res.json(loghandler.notquery)
+  if(!apikey) return res.json(loghandler.notparam)
+  
+  if(listkey.includes(apikey)){
+    chara(query)
+        .then(jadi => {
+        var result = jadi;
+             res.json({
+               status: true,
+               code: 200,
+               creator: `${creator}`,
+                 result
+             })
+         })
+         .catch(e => {
+          res.json(loghandler.error)
 })
   } else {
     res.sendFile(__path + '/views/apikey-not-found.html');
