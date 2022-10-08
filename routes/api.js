@@ -93,7 +93,8 @@ var {
   ssweb,
   tafsirsurah,
   linkwa,
-  styletext
+  styletext,
+  wikimedia
 } = require("./../lib/utils/scraper");
 
 var {
@@ -1028,6 +1029,32 @@ router.get('/textpro/styletext', async(req, res, next) => {
   
   if(listkey.includes(apikey)){
     styletext(teks)
+        .then(hasil => {
+        var result = hasil;
+             res.json({
+               status: true,
+               code: 200,
+               creator: `${creator}`,
+                 result
+             })
+         })
+         .catch(e => {
+          res.json(loghandler.error)
+})
+  } else {
+    res.sendFile(__path + '/views/apikey-not-found.html');
+  }
+});
+
+router.get('/download/wikimedia', async(req, res, next) => {
+  const apikey = req.query.apikey;
+  const title = req.query.query;
+  
+  if(!title) return res.json(loghandler.notquery)
+  if(!apikey) return res.json(loghandler.notparam)
+  
+  if(listkey.includes(apikey)){
+    wikimedia(title)
         .then(hasil => {
         var result = hasil;
              res.json({
