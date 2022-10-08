@@ -1672,29 +1672,30 @@ res.sendFile(__path + '/views/apikey-not-found.html');
 })
 
 router.get('/id/epep', async (req, res, next) => {
-        var Apikey = req.query.apikey;
-	var id = req.query.id;
-            
-	if(!Apikey) return res.json(loghandler.notparam)
-	if(!id) return res.json({'Pesan_untuk_anda': 'Masukkin id free firenya'})
-	if(listkey.includes(Apikey)){
-
-       fetch(encodeURI(`https://api.nichicodex.xyz/idFF/?id=${id}&type=json`))
-        .then(response => response.json())
+  const apikey = req.query.apikey;
+  const text = req.query.text;
+  
+  if(!text) return res.json(loghandler.nottext)
+  if(!apikey) return res.json(loghandler.notparam)
+  
+  if(listkey.includes(apikey)){
+    stalkff(text)
         .then(data => {
-        var result = data.data;
+        var result = data;
              res.json({
-                 creator : `${creator}, Itskhyaa`,
+               status: true,
+               code: 200,
+               creator: `${creator}`,
                  result
              })
          })
          .catch(e => {
-         	res.json(loghandler.error)
+          res.json(loghandler.error)
 })
-} else {
-res.sendFile(__path + '/views/apikey-not-found.html');
-}
-})
+  } else {
+    res.sendFile(__path + '/views/apikey-not-found.html');
+  }
+});
 
 router.get('/id/ml', async (req, res, next) => {
         var Apikey = req.query.apikey;
