@@ -98,6 +98,10 @@ var {
   chara
 } = require("./../lib/utils/scraper");
 
+var { 
+  stalkff
+} = require("./../lib/utils/stalker");
+
 var {
   Cuaca, 
   Lirik
