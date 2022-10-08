@@ -1073,6 +1073,32 @@ router.get('/download/wikimedia', async(req, res, next) => {
   }
 });
 
+router.get('/wallpaper/chara', async(req, res, next) => {
+  const apikey = req.query.apikey;
+  const query = req.query.query;
+  
+  if(!query) return res.json(loghandler.notquery)
+  if(!apikey) return res.json(loghandler.notparam)
+  
+  if(listkey.includes(apikey)){
+    chara(query)
+        .then(jadi => {
+        var result = jadi;
+             res.json({
+               status: true,
+               code: 200,
+               creator: `${creator}`,
+                 result
+             })
+         })
+         .catch(e => {
+          res.json(loghandler.error)
+})
+  } else {
+    res.sendFile(__path + '/views/apikey-not-found.html');
+  }
+});
+
 router.get('/download/soundcloud', async(req, res, next) => {
   const apikey = req.query.apikey;
   const url = req.query.url;
@@ -1771,31 +1797,6 @@ router.get('/random/wallpaper', async(req, res, next) => {
   }
 });
 
-router.get('/wallpaper/chara', async(req, res, next) => {
-  const apikey = req.query.apikey;
-  const query = req.query.query;
-  
-  if(!query) return res.json(loghandler.notquery)
-  if(!apikey) return res.json(loghandler.notparam)
-  
-  if(listkey.includes(apikey)){
-    chara(query)
-        .then(jadi => {
-        var result = jadi;
-             res.json({
-               status: true,
-               code: 200,
-               creator: `${creator}`,
-                 result
-             })
-         })
-         .catch(e => {
-          res.json(loghandler.error)
-})
-  } else {
-    res.sendFile(__path + '/views/apikey-not-found.html');
-  }
-});
 
 router.get('/info/berita2', async (req, res, next) => {
         var Apikey = req.query.apikey
