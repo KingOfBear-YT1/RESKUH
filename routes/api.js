@@ -886,7 +886,7 @@ res.sendFile(__path + '/views/apikey-not-found.html');
 }
 })
 
-router.get('/download/tiktokmp3', async(req, res, next) => {
+router.get('/download/tiktok2', async(req, res, next) => {
   const apikey = req.query.apikey;
   const url = req.query.url;
   
