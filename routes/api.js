@@ -86,7 +86,8 @@ var {
 
 var { 
   ttdl,
-  fbdl
+  fbdl,
+  soundcloud
 } = require("./../lib/utils/scraper");
 
 var {
@@ -896,6 +897,32 @@ router.get('/download/tiktok2', async(req, res, next) => {
   
   if(listkey.includes(apikey)){
     ttdl(url)
+        .then(result => {
+        var result = result;
+             res.json({
+               status: true,
+               code: 200,
+               creator: `${creator}`,
+                 result
+             })
+         })
+         .catch(e => {
+          res.json(loghandler.error)
+})
+  } else {
+    res.sendFile(__path + '/views/apikey-not-found.html');
+  }
+});
+
+router.get('/download/soundcloud', async(req, res, next) => {
+  const apikey = req.query.apikey;
+  const url = req.query.url;
+  
+  if(!url) return res.json(loghandler.noturl)
+  if(!apikey) return res.json(loghandler.notparam)
+  
+  if(listkey.includes(apikey)){
+    soundcloud(url)
         .then(result => {
         var result = result;
              res.json({
