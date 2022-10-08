@@ -87,7 +87,9 @@ var {
 var { 
   ttdl,
   fbdl,
-  soundcloud
+  soundcloud,
+  telesticker,
+  stickersearch
 } = require("./../lib/utils/scraper");
 
 var {
@@ -896,6 +898,58 @@ router.get('/download/tiktok2', async(req, res, next) => {
   
   if(listkey.includes(apikey)){
     ttdl(url)
+        .then(result => {
+        var result = result;
+             res.json({
+               status: true,
+               code: 200,
+               creator: `${creator}`,
+                 result
+             })
+         })
+         .catch(e => {
+          res.json(loghandler.error)
+})
+  } else {
+    res.sendFile(__path + '/views/apikey-not-found.html');
+  }
+});
+
+router.get('/download/telesticker', async(req, res, next) => {
+  const apikey = req.query.apikey;
+  const url = req.query.url;
+  
+  if(!url) return res.json(loghandler.noturl)
+  if(!apikey) return res.json(loghandler.notparam)
+  
+  if(listkey.includes(apikey)){
+    telesticker(url)
+        .then(result => {
+        var result = result;
+             res.json({
+               status: true,
+               code: 200,
+               creator: `${creator}`,
+                 result
+             })
+         })
+         .catch(e => {
+          res.json(loghandler.error)
+})
+  } else {
+    res.sendFile(__path + '/views/apikey-not-found.html');
+  }
+});
+
+router.get('/download/stickersearch', async(req, res, next) => {
+  const apikey = req.query.apikey;
+  const text = req.query.text;
+  
+  if(!text) return res.json(loghandler.nottext)
+  if(!apikey) return res.json(loghandler.notparam)
+  
+  if(listkey.includes(apikey)){
+    stickersearch(text)
         .then(result => {
         var result = result;
              res.json({
