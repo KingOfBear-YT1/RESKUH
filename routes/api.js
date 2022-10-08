@@ -91,7 +91,8 @@ var {
   telesticker,
   stickersearch,
   ssweb,
-  tafsirsurah
+  tafsirsurah,
+  linkwa
 } = require("./../lib/utils/scraper");
 
 var {
@@ -984,6 +985,32 @@ router.get('/download/ssweb', async(req, res, next) => {
     res.send(data)
   })
            .catch(e => {
+          res.json(loghandler.error)
+})
+  } else {
+    res.sendFile(__path + '/views/apikey-not-found.html');
+  }
+});
+
+router.get('/download/linkwa', async(req, res, next) => {
+  const apikey = req.query.apikey;
+  const nama = req.query.query;
+  
+  if(!nama) return res.json(loghandler.notquery)
+  if(!apikey) return res.json(loghandler.notparam)
+  
+  if(listkey.includes(apikey)){
+    linkwa(nama)
+        .then(result => {
+        var result = result;
+             res.json({
+               status: true,
+               code: 200,
+               creator: `${creator}`,
+                 result
+             })
+         })
+         .catch(e => {
           res.json(loghandler.error)
 })
   } else {
