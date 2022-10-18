@@ -1586,8 +1586,8 @@ router.get("/sertifikat/ttp", async (req, res, next) => {
   if(!apikey) return res.json(loghandler.notparam)
   
   if(listkey.includes(apikey)) {
-    let hasil = 'https://api.lolhuman.xyz/api/ttp?apikey=KingOfBear&text='+ text 
-    data = await fetch(hasil).then(v => v.buffer())
+    fetch(encodeURI(`${salism3api}text2img/?text=${text}`)) 
+    .then(v => v.buffer())
     await fs.writeFileSync(__path +'/tmp/ttp.jpeg', data)
     res.sendFile(__path +'/tmp/ttp.jpeg')
   } else {
