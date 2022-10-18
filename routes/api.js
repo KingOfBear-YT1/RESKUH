@@ -10,6 +10,7 @@ var zahirr = db.get("zahirr");
  
 var creator = "King Of Bear"
 var lolkey = "KingOfBear"
+var salism3api = "https://salism3api.pythonanywhere.com/"
 const brainly = require('brainly-scraper');
 var si = require('systeminformation');
 var secure = require('ssl-express-www');
@@ -4422,10 +4423,10 @@ router.get('/maker/ttp', async(req, res, next) => {
   if(!apikey) return res.json(loghandler.notparam)
   
   if(listkey.includes(apikey)) {
-  let hasil = 'http://fxc7-api.herokuapp.com/api/maker/ttp?apikey=e5mX2Gd9&text='+ text
+  let hasil = `${salism3api}text2img/?text=`+ text
   data = await fetch(hasil).then(v => v.buffer())
-  await fs.writeFileSync(__path +'/tmp/attp.gif', data)
-  res.sendFile(__path +'/tmp/attp.gif')
+  await fs.writeFileSync(__path +'/tmp/ttp.png', data)
+  res.sendFile(__path +'/tmp/ttp.png')
   } else {
     res.json(loghandler.invalidKey)
   }
@@ -4439,7 +4440,7 @@ router.get('/maker/attp', async(req, res, next) => {
   if(!apikey) return res.json(loghandler.notparam)
   
   if(listkey.includes(apikey)) {
-  let hasil = 'http://fxc7-api.herokuapp.com/api/maker/attp?apikey=e5mX2Gd9&text='+ text
+  let hasil = `${salism3api}text2gif/?text=`+ text
   data = await fetch(hasil).then(v => v.buffer())
   await fs.writeFileSync(__path +'/tmp/attp.gif', data)
   res.sendFile(__path +'/tmp/attp.gif')
