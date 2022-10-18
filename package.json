@@ -4,7 +4,7 @@
   "description": "My Rest Api free",
   "main": "nodemon index.js",
   "scripts": {
-    "start": "nodemon index.js"
+    "start": "dev index.js"
   },
   "repository": {
     "type": "git",
