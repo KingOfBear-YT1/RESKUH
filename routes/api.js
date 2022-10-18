@@ -4423,13 +4423,23 @@ router.get('/maker/ttp', async(req, res, next) => {
   if(!apikey) return res.json(loghandler.notparam)
   
   if(listkey.includes(apikey)) {
-  let hasil = `${salism3api}text2img/?text=`+ text
-  data = await fetch(hasil).then(v => v.buffer())
-  await fs.writeFileSync(__path +'/tmp/ttp.png', data)
-  res.sendFile(__path +'/tmp/ttp.png')
-  } else {
-    res.json(loghandler.invalidKey)
-  }
+    fetch(encodeURI(`${salism3api}text2img/?text=${text}`))
+  .then(response => response.json())
+        .then(hasil => {
+
+        var result = hasil;
+             res.json({
+                 status : true,
+                 creator : `${creator}`,
+                 result
+             })
+         })
+         .catch(e => {
+          res.json(loghandler.error)
+})
+} else {
+  res.sendFile(__path + '/views/apikey-not-found.html');
+}
 })
 
 router.get('/maker/attp', async(req, res, next) => {
