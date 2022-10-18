@@ -1577,24 +1577,6 @@ router.get("/sertifikat/pacarserti", async (req, res, next) => {
   }
 });
 
-router.get("/sertifikat/ttp", async (req, res, next) => {
-  
-  apikey = req.query.apikey;
-  text = req.query.text;
-  
-  if(!text) return res.json(loghandler.nottext)
-  if(!apikey) return res.json(loghandler.notparam)
-  
-  if(listkey.includes(apikey)) {
-    fetch(encodeURI(`${salism3api}text2img/?text=${text}`)) 
-    .then(v => v.buffer())
-    await fs.writeFileSync(__path +'/tmp/ttp.jpeg', data)
-    res.sendFile(__path +'/tmp/ttp.jpeg')
-  } else {
-    res.sendFile(__path + '/views/apikey-not-found.html');
-  }
-});
-
 router.get('/darkjoke', async (req, res, next) => {
   Apikey = req.query.apikey;
   
@@ -4415,10 +4397,11 @@ router.get("/maker/joker", async (req, res, next) => {
   }
 })
 
-router.get('/maker/ttp', async(req, res, next) => {
-
-  const text = req.query.text;
-  const apikey = req.query.apikey;
+router.get("/ttp", async (req, res, next) => {
+  
+  apikey = req.query.apikey;
+  text = req.query.text;
+  
   if(!text) return res.json(loghandler.nottext)
   if(!apikey) return res.json(loghandler.notparam)
   
@@ -4440,23 +4423,6 @@ router.get('/maker/ttp', async(req, res, next) => {
 } else {
   res.sendFile(__path + '/views/apikey-not-found.html');
 }
-})
-
-router.get('/maker/attp', async(req, res, next) => {
-
-  const text = req.query.text;
-  const apikey = req.query.apikey;
-  if(!text) return res.json(loghandler.nottext)
-  if(!apikey) return res.json(loghandler.notparam)
-  
-  if(listkey.includes(apikey)) {
-  let hasil = `${salism3api}text2gif/?text=`+ text
-  data = await fetch(hasil).then(v => v.buffer())
-  await fs.writeFileSync(__path +'/tmp/attp.gif', data)
-  res.sendFile(__path +'/tmp/attp.gif')
-  } else {
-    res.json(loghandler.invalidKey)
-  }
 })
 
 router.get('/maker/harta-tahta', async(req, res, next) => {
