@@ -10,7 +10,6 @@ var zahirr = db.get("zahirr");
  
 var creator = "King Of Bear"
 var lolkey = "KingOfBear"
-var salism3api = "https://salism3api.pythonanywhere.com/"
 const brainly = require('brainly-scraper');
 var si = require('systeminformation');
 var secure = require('ssl-express-www');
@@ -4395,34 +4394,6 @@ router.get("/maker/joker", async (req, res, next) => {
   } else {
     res.sendFile(__path + '/views/apikey-not-found.html');
   }
-})
-
-router.get("/ttp", async (req, res, next) => {
-  
-  apikey = req.query.apikey;
-  text = req.query.text;
-  
-  if(!text) return res.json(loghandler.nottext)
-  if(!apikey) return res.json(loghandler.notparam)
-  
-  if(listkey.includes(apikey)) {
-    fetch(encodeURI(`${salism3api}text2img/?text=${text}`))
-  .then(response => response.json())
-        .then(hasil => {
-
-        var result = hasil;
-             res.json({
-                 status : true,
-                 creator : `${creator}`,
-                 result
-             })
-         })
-         .catch(e => {
-          res.json(loghandler.error)
-})
-} else {
-  res.sendFile(__path + '/views/apikey-not-found.html');
-}
 })
 
 router.get('/maker/harta-tahta', async(req, res, next) => {
